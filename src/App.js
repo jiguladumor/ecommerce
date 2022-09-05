@@ -6,6 +6,7 @@ import Home from './container/Home/Home';
 import About from './container/About/About';
 import Blog from './container/Blog/Blog';
 import Shope from './container/Shope/Shope';
+import Login from './container/Login/Login';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route exact path={"/About"} component={About} />
         <Route exact path={"/Blog"} component={Blog} />
         <Route exact path={"/Shope"} component={Shope} />
+        <Route exact path={"/Login"} component={Login} />
        </Switch>
       <Footer />
     </div>
