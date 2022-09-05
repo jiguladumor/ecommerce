@@ -1,0 +1,263 @@
+/*===========================variable===========================*/
+$theme-color: #FF6F61;
+$line-height:1.9;
+$button-color:#FF6F61;
+$background-color:#fff;
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+/*===========================mixin===========================*/
+@mixin after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+}
+
+@mixin before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    right: 0;
+    bottom: 0;
+}
+
+@mixin color {
+    .mega-hover {
+        overflow: hidden;
+    }
+
+    .mega-hover:hover:before {
+        left: 0;
+        right: 0;
+        opacity: 1;
+        transition: all 0.5s linear;
+    }
+
+    .mega-hover:before {
+        content: '';
+        position: absolute;
+        pointer-events: none;
+        opacity: 1;
+        z-index: -1;
+        top: 0;
+        right: -100%;
+        opacity: 0;
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .mega-hover:hover::after {
+        left: 0;
+        right: 0;
+        opacity: 0;
+        transition: all 900ms linear;
+    }
+
+    .mega-hover::after {
+        content: '';
+        position: absolute;
+        pointer-events: none;
+        opacity: 1;
+        // z-index: 3;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        left: 100%;
+        opacity: 1;
+        background: rgba(255, 255, 255, 0.2);
+    }
+}
+
+/*===========================about-banner===========================*/
+.about {
+    padding-top: 150px;
+    padding-bottom: 150px;
+    position: relative;
+    z-index: 1;
+}
+
+.breadcrumb {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.breadcrumb a {
+    text-decoration: none;
+}
+
+.overlay::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
+
+/*===========================Aytor-Shop===========================*/
+.shope {
+    position: relative;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+.py-40 {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.about-shape {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #f1f3f4;
+    height: 100%;
+    width: calc(100% - 110px);
+    clip-path: polygon(0 0, 100% 0%, 100% 100%, 25% 100%, 0% 50%);
+    z-index: -1;
+}
+
+.shope-text p {
+    line-height: $line-height;
+}
+
+.style1 {
+    margin: 0;
+    padding: 0;
+    background-color: #E0E0E0;
+    opacity: 1;
+    position: relative;
+    z-index: 2;
+    height: 1px;
+}
+
+.shope .btn {
+    padding: 15px 20px;
+    background-color: $button-color;
+    color: #fff;
+    border-radius: 0;
+}
+
+
+/*==========================space-extra-bottom===========================*/
+.counter-box {
+    padding-bottom: 70px;
+}
+
+.box {
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    background-color: rgba(255, 111, 97, 0.1);
+    margin: 0 auto 20px auto;
+}
+
+.counter-title h2 {
+    color: $theme-color;
+}
+
+.box img {
+    filter: invert(100%) brightness(0.2);
+}
+
+.box:hover img {
+    filter: grayscale(10%);
+}
+
+/*==========================space-extra-bottom===========================*/
+.our-Story {
+    background-color: #f1f3f4;
+    position: relative;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+
+/*==========================feature-box===========================*/
+.feature-box {
+    padding-top: 70px;
+}
+
+/*==========================Expart Team===========================*/
+.team-image {
+    background-color: #fff;
+    box-shadow: 0px 5px 14px rgb(17 22 30 / 8%);
+    overflow: hidden;
+}
+
+.team-images {
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.team-images img {
+    transition: all .5s ease-in-out;
+}
+
+.team-images:hover img {
+    transform: scale(1.08);
+}
+
+
+/*==========================Expart Team===========================*/
+.avater-img img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.avater-images {
+    max-width: 571px;
+    margin: 15px auto 32px auto;
+    text-align: center;
+}
+
+.avater-img p {
+    line-height: $line-height;
+    max-width: 584px;
+    margin: auto;
+}
+
+
+/*===========================footer===========================*/
+footer {
+    background-color: #f1f3f4;
+    max-width: 1800px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    z-index: 3;
+    padding-top: 80px;
+}
+
+.contact a,.Account a  {
+    text-decoration: none;
+}
+
+.contact i {
+    color: $theme-color;
+}
+
+input.form-control{
+    height: 50px;
+    background-color: #fff;
+    border: 0;
+}
+
+.letter .input-group-text {
+    font-size: 16px;
+    background-color: $theme-color;
+    color: #fff;
+}

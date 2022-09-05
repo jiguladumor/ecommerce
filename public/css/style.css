@@ -1,0 +1,513 @@
+/*===========================variable===========================*/
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+/*===========================mixin===========================*/
+/*===========================commen-css===========================*/
+a {
+  text-decoration: none;
+}
+
+.theam-color {
+  background-color: #fff;
+  box-shadow: 10px -11px 22px 6px rgba(255, 246, 246, 0.93);
+}
+
+.overlay {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.banner-text {
+  top: 25%;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.banner-text h1 {
+  font-size: 50px;
+}
+
+.btns {
+  background-color: #FF6F61;
+  padding: 10px 30px;
+  border: 0;
+}
+
+.banner-text p {
+  max-width: 397px;
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.overlays {
+  content: "";
+  position: absolute;
+  width: 33%;
+  height: 100vw;
+  top: -18%;
+  right: 0;
+  background-color: #FF6F61;
+  z-index: -1;
+}
+
+.banner-hero {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  top: 50%;
+  left: -15%;
+  top: 63%;
+  z-index: -1;
+}
+
+.banner-image-2 {
+  z-index: 1;
+}
+
+/*===========================collection===========================*/
+.collection {
+  padding-top: 100px;
+}
+
+.collection-text {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  top: 10%;
+  left: 25%;
+  z-index: 2;
+}
+
+.collections-btn {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  right: 0;
+  bottom: 0;
+  right: -26%;
+  bottom: -78%;
+  z-index: 2;
+}
+
+.collections-btn .btn {
+  border: 1px solid #000;
+  padding: 10px 40px;
+}
+
+.mega-hover {
+  overflow: hidden;
+}
+
+.mega-hover:hover:before {
+  left: 0;
+  right: 0;
+  opacity: 1;
+  transition: all 0.5s linear;
+}
+
+.mega-hover:before {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  z-index: -1;
+  top: 50%;
+  right: 0;
+  bottom: 50%;
+  left: 0;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.mega-hover:hover::after {
+  left: 0;
+  right: 0;
+  opacity: 0;
+  transition: all 900ms linear;
+}
+
+.mega-hover::before {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  z-index: 3;
+  top: 0;
+  right: 51%;
+  bottom: 0;
+  left: 50%;
+  z-index: 3;
+  background: rgba(255, 255, 255, 0.2);
+  transition: all 900ms linear;
+}
+
+.mega-hover::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  opacity: 1;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  left: 100%;
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/*===========================Top Products===========================*/
+.product {
+  padding-top: 100px;
+}
+
+.product-text h2 {
+  font-size: 36px;
+}
+
+.product-btn .btn:first-child {
+  padding: 10px 25px;
+  background-color: #FF6F61;
+}
+
+.product-btn .btn:nth-child(2) {
+  padding: 10px 25px;
+}
+
+.product-btn .btn:nth-child(3) {
+  padding: 10px 25px;
+}
+
+.product-btn .btn:nth-child(4) {
+  padding: 10px 25px;
+}
+
+.product-btn .btn:nth-child(5) {
+  padding: 10px 25px;
+}
+
+.product-btn .btn:nth-child(6) {
+  padding: 10px 25px;
+}
+
+.product-box {
+  background-color: #f1f3f4;
+  overflow: hidden;
+  position: relative;
+  margin-right: 10px;
+}
+
+.product-box img {
+  transition: all 0.5s ease-in-out;
+}
+
+.product-box img:hover {
+  transform: scale(1.1);
+}
+
+.product-meta span {
+  font-size: 16px;
+  color: #FF6F61;
+}
+
+/*===========================video===========================*/
+.video {
+  background-image: url(../image/banner_1.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  margin-top: 100px;
+  position: relative;
+}
+
+.video span {
+  color: #FF6F61;
+}
+
+.video h4 {
+  max-width: 558px;
+  font-size: 48px;
+}
+
+.video p {
+  max-width: 558px;
+  line-height: 32px;
+}
+
+.video-btn {
+  position: relative;
+}
+
+.video-btn .play-btn {
+  background: #fff;
+  color: #fff;
+  font-size: 30px;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: -20px;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  text-align: center;
+  border-radius: 50%;
+  transition: all 0.5s ease-in-out;
+}
+
+.video-btn .play-btn i {
+  line-height: 100px;
+  margin-left: 5px;
+  color: #FF6F61;
+  z-index: 1;
+}
+
+.video-btn .play-btn::after,
+.video-btn .play-btn::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  border-radius: 50%;
+  animation: pluse 1s linear infinite;
+  opacity: 0;
+}
+
+.video-btn .play-btn::before {
+  content: "";
+  background: #fff;
+  display: grid;
+  place-items: center;
+  z-index: 1;
+}
+
+.video-btn .play-btn::after {
+  background: #fff;
+  z-index: -1;
+  animation-delay: 0.5s;
+}
+
+@keyframes pluse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.75;
+  }
+  100% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+}
+.mega-hover {
+  overflow: hidden;
+}
+
+.mega-hover:hover:before {
+  left: 0;
+  right: 0;
+  opacity: 1;
+  transition: all 0.5s linear;
+}
+
+.mega-hover:before {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  opacity: 1;
+  z-index: -1;
+  top: 0;
+  right: -100%;
+  opacity: 0;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.mega-hover:hover::after {
+  left: 0;
+  right: 0;
+  opacity: 0;
+  transition: all 900ms linear;
+}
+
+.mega-hover::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  opacity: 1;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  left: 100%;
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/*===========================Shoes-Sale===========================*/
+.Shoes {
+  padding-top: 100px;
+}
+
+.banner-style1 {
+  position: relative;
+  padding: 45px 50px 45px 50px;
+}
+
+.banner-content {
+  position: static;
+  width: auto;
+  height: auto;
+}
+
+.banner-content h2 {
+  line-height: 40px;
+}
+
+/*===========================Nike-Shoes===========================*/
+.banner-contents {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  padding: 45px 20px 50px 20px;
+}
+
+.banner-contents .btn {
+  position: absolute;
+  bottom: 10px;
+  left: 33%;
+}
+
+.banner-contents .btn::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #fff;
+  transition: all ease 0.3s;
+}
+
+.banner-contents .btn:hover::before {
+  width: 50%;
+  background-color: #FF6F61;
+}
+
+.banner-contents .btn:hover {
+  color: red;
+}
+
+.title-line {
+  height: 1px;
+  width: 100%;
+  background-color: #000;
+}
+
+.slick-track {
+  position: relative;
+  top: 0;
+  left: 0;
+  display: block;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+button#slick-slide-control10 {
+  width: 40px;
+  height: 40px;
+  background-color: rebeccapurple;
+}
+
+.customer-texts {
+  box-shadow: 0px 5px 14px rgba(17, 22, 30, 0.08);
+  background-color: var(--white-color);
+  padding: 40px;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.customer-texts i {
+  color: #FF6F61;
+}
+
+.customer-texts p {
+  line-height: 1.9;
+}
+
+.customer-texts::before {
+  content: "";
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: calc(100% - 14px);
+  left: 50%;
+  box-shadow: 15px 20px 15px rgba(17, 22, 30, 0.1);
+  background-color: #fff;
+  transform: translateX(-50%) rotate(45deg) skew(13deg, 13deg);
+}
+
+.box-name p {
+  color: #FF6F61;
+}
+
+/*===========================logo===========================*/
+.brand-logo {
+  border: 1px solid #e0e0e0;
+  padding: 50px 0;
+}
+
+/*===========================lcons===========================*/
+.icons-img img {
+  width: 233px;
+}
+
+/*===========================footer===========================*/
+footer {
+  background-color: #f1f3f4;
+  max-width: 1800px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  z-index: 3;
+  padding-top: 80px;
+}
+
+.contact a, .Account a {
+  text-decoration: none;
+}
+
+.contact i {
+  color: #FF6F61;
+}
+
+input.form-control {
+  height: 50px;
+  background-color: #fff;
+  border: 0;
+}
+
+.letter .input-group-text {
+  font-size: 16px;
+  background-color: #FF6F61;
+  color: #fff;
+}
+
+/*# sourceMappingURL=style.css.map */
