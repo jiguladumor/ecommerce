@@ -7,7 +7,7 @@ import About from './container/About/About';
 import Blog from './container/Blog/Blog';
 import Shope from './container/Shope/Shope';
 import Login from './container/Login/Login';
-import Category_admin from './container/Category_admin'
+import Category_admin from './container/Admin/Category_admin'
 
 
 
