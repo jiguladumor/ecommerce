@@ -8,13 +8,17 @@ import Blog from './container/Blog/Blog';
 import Shope from './container/Shope/Shope';
 import Login from './container/Login/Login';
 import Category_admin from './container/Admin/Category_admin'
+import { Provider } from 'react-redux';
+import { store } from './container/redux/Store';
 
 
 
 function App() {
+
   return (
     <div className="App">
      <Header/>
+     <Provider store={store}>
       <Switch> 
         <Route exact path={"/Home"} component={Home} />
         <Route exact path={"/About"} component={About} />
@@ -23,6 +27,7 @@ function App() {
         <Route exact path={"/Login"} component={Login} />
         <Route exact path={"/Category_admin"} component={Category_admin} />
        </Switch>
+       </Provider>
       <Footer />
     </div>
   );

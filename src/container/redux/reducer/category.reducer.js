@@ -18,6 +18,13 @@ export const categoryReducer = (state = initalState, action) => {
                 category: action.payload,
                 error: ''
             }
+            case ActionTypes.ERROR_CATEGORY:
+                return {
+                    ...state,
+                    isLoading: false,
+                    category: [],
+                    error: action.payload
+                }
         
         default:
             return state;

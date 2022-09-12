@@ -19,13 +19,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addCategory, Categorydata } from '../redux/action/category.action';
 
 
-export default function Medicine() {
+export default function Category() {
   const [open, setOpen] = React.useState(false);
   const [data, setData] = useState([])
   const [Update, setUpdate] = useState();
   const [dopen, setDopen] = React.useState(false);
   const [did, setDid] = useState()
   const dispatch = useDispatch();
+  const categorys = useSelector(state => state.category) 
+  console.log(categorys);
 
   const handleClickDopen = (id) => {
     setDopen(true);
@@ -48,9 +50,7 @@ export default function Medicine() {
 
   let datad = {
     name: yup.string().required('enter name'),
-    // price: yup.string().required('please enter price'),
-    // Category: yup.string().required('please enter Category'),
-
+    file: yup.mixed().required('please select file'),
   }
 
   let schema = yup.object().shape(datad);
@@ -58,8 +58,7 @@ export default function Medicine() {
   const formik = useFormik({
     initialValues: {
       name: '',
-      // Category: '',
-      // price: '',
+      file: ''
     },
     validationSchema: schema,
     onSubmit: (value, { resetForm }) => {
@@ -73,7 +72,7 @@ export default function Medicine() {
   })
   
   const handleupdate = (value) => {
-    let localdata = JSON.parse(localStorage.getItem("users"));
+    let localdata = JSON.parse(localStorage.getItem("category"));
     
     let udata = localdata.map((l, i) => {
       if(l.id === value.id) {
@@ -84,7 +83,7 @@ export default function Medicine() {
     })
     console.log(udata);
 
-    localStorage.setItem("users", JSON.stringify(udata))
+    localStorage.setItem("category", JSON.stringify(udata))
     setOpen(false)
     setUpdate()
     loadData()
@@ -92,19 +91,19 @@ export default function Medicine() {
 
   const handleSubmitdata = (values) => {
     // console.log(values);
-    // let localdata = JSON.parse(localStorage.getItem("users"))
+    let localdata = JSON.parse(localStorage.getItem("category"))
 
-    let data = {
-      id: Math.floor(Math.random() * 1000),
-      ...values
-    }
+    // let data = {
+    //   id: Math.floor(Math.random() * 1000),
+    //   ...values
+    // }
 
 
     // if (localdata === null) {
-    //   localStorage.setItem("users", JSON.stringify([data]))
+    //   localStorage.setItem("category", JSON.stringify([data]))
     // } else {
     //   localdata.push(data)
-    //   localStorage.setItem("users", JSON.stringify(localdata))
+    //   localStorage.setItem("category", JSON.stringify(localdata))
     // }
 
     dispatch(addCategory(values))
@@ -118,7 +117,13 @@ export default function Medicine() {
     
     { field: 'id', headerName: 'ID', width: 70 },
     { field: 'name', headerName: 'Name', width: 130 },
-    
+    { field: 'url', headerName: 'image', width: 130,
+
+      renderCell: (params) => (
+        <img  src={params.row.url} width={50} height={50} />
+      )
+
+    },
     {
       field: 'delete', headerName: 'Delete', width: 130,
       renderCell: (params) => (
@@ -149,21 +154,21 @@ export default function Medicine() {
   }
 
   const handleDelete = (id) => {
-    let localData = JSON.parse(localStorage.getItem("users"))
+    let localData = JSON.parse(localStorage.getItem("category"))
 
     let filterData = localData.filter((v, i) => v.id !== did);
 
-    localStorage.setItem("users", JSON.stringify(filterData));
+    localStorage.setItem("category", JSON.stringify(filterData));
     loadData()
     setDopen(false)
   }
 
   const loadData = () => {
-    let localData = JSON.parse(localStorage.getItem("users"))
+    // let localData = JSON.parse(localStorage.getItem("category"))
 
-    if (localData !== null) {
-      setData(localData)
-    }
+    // if (localData !== null) {
+      setData(categorys.category)
+    // }
   }
 
 
@@ -185,7 +190,7 @@ export default function Medicine() {
             </Button>
             <div style={{ height: 400, width: '100%' }}>
               <DataGrid
-                rows={data}
+                rows={categorys.category}
                 columns={columns}
                 pageSize={5}
                 rowsPerPageOptions={[5]}
@@ -201,7 +206,7 @@ export default function Medicine() {
                       autoFocus
                       margin="dense"
                       id="name"
-                      label="name Address"
+                      label="name"
                       type="name"
                       fullWidth
                       variant="standard"
@@ -210,7 +215,15 @@ export default function Medicine() {
                       helperText={formik.errors.name}
                       error={formik.errors.name ? true : false}
                     />
-
+                    <input
+                    type="file"
+                    name="file"
+                    id="file"
+                    fullWidth
+                    variant="standard"
+                    onChange={e => formik.setFieldValue("file", e.target.files[0])}
+                  
+                  />
                   </DialogContent>
                   <DialogActions>
                   <Button onClick={handleClose}>Cancel</Button>
