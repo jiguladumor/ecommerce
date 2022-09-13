@@ -27,7 +27,7 @@ function App() {
         <Route exact path={"/Login"} component={Login} />
         <Route exact path={"/Category_admin"} component={Category_admin} />
        </Switch>
-       </Provider>
+     </Provider>
       <Footer />
     </div>
   );

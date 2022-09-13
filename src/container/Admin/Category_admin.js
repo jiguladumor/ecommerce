@@ -16,7 +16,7 @@ import { DialogContentText, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CreateIcon from '@mui/icons-material/Create';
 import { useDispatch, useSelector } from 'react-redux';
-import { addCategory, Categorydata } from '../redux/action/category.action';
+import { addCategory, Categorydata, deletecategory, editcategory } from '../redux/action/category.action';
 
 
 export default function Category() {
@@ -27,7 +27,7 @@ export default function Category() {
   const [did, setDid] = useState()
   const dispatch = useDispatch();
   const categorys = useSelector(state => state.category) 
-  console.log(categorys);
+  // console.log(categorys);
 
   const handleClickDopen = (id) => {
     setDopen(true);
@@ -72,18 +72,20 @@ export default function Category() {
   })
   
   const handleupdate = (value) => {
-    let localdata = JSON.parse(localStorage.getItem("category"));
+    // let localdata = JSON.parse(localStorage.getItem("category"));
     
-    let udata = localdata.map((l, i) => {
-      if(l.id === value.id) {
-          return value;
-      } else {
-        return l;
-      }
-    })
-    console.log(udata);
+    // let udata = localdata.map((l, i) => {
+    //   if(l.id === value.id) {
+    //       return value;
+    //   } else {
+    //     return l;
+    //   }
+    // })
+    // console.log(udata);
 
-    localStorage.setItem("category", JSON.stringify(udata))
+    // localStorage.setItem("category", JSON.stringify(udata))
+
+    dispatch(editcategory(value))
     setOpen(false)
     setUpdate()
     loadData()
@@ -128,7 +130,7 @@ export default function Category() {
       field: 'delete', headerName: 'Delete', width: 130,
       renderCell: (params) => (
         <>
-          <IconButton aria-label="delete" onClick={() => handleClickDopen(params.row.id)}>
+          <IconButton aria-label="delete" onClick={() => handleClickDopen(params.row)}>
             <DeleteIcon />
           </IconButton>
         </>
@@ -154,11 +156,15 @@ export default function Category() {
   }
 
   const handleDelete = (id) => {
-    let localData = JSON.parse(localStorage.getItem("category"))
+    console.log(id);
+    // let localData = JSON.parse(localStorage.getItem("category"))
 
-    let filterData = localData.filter((v, i) => v.id !== did);
+    // let filterData = localData.filter((v, i) => v.id !== did);
 
-    localStorage.setItem("category", JSON.stringify(filterData));
+    // localStorage.setItem("category", JSON.stringify(filterData));
+
+    dispatch(deletecategory(did))
+
     loadData()
     setDopen(false)
   }
@@ -179,6 +185,7 @@ export default function Category() {
     },
     [])
 
+    console.log(categorys.category);
   return (
     <>
 
