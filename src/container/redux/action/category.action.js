@@ -58,33 +58,62 @@ export const addCategory = (data) => (dispatch) => {
 }
 
 
-export const deletecategory = (data) =>  async (dispatch) => {
+export const deletecategory = (data) => async (dispatch) => {
   console.log(data);
   try {
-    const categorysRef = ref(storage, 'categorys/'+data.FileName);
+    const categorysRef = ref(storage, 'categorys/' + data.FileName);
     // console.log(categorysRef);
     deleteObject(categorysRef).then(async () => {
-        await deleteDoc(doc(db, "categorys", data.id));
-        dispatch({ type: ActionTypes.DELETE_CATEGORY, payload: data.id })
-      }).catch((error) => {
-        dispatch(errorCategory(error.message))
-      });
-  } 
+      await deleteDoc(doc(db, "categorys", data.id));
+      dispatch({ type: ActionTypes.DELETE_CATEGORY, payload: data.id })
+    }).catch((error) => {
+      dispatch(errorCategory(error.message))
+    });
+  }
   catch (error) {
     dispatch(errorCategory(error.message))
   }
 }
 
 export const editcategory = (data) => async (dispatch) => {
+  console.log(data);
+  
   try {
-
     const categorysRef = doc(db, "categorys", data.id);
+    if (typeof data.file === "string") { 
+      console.log("only data");
+      await updateDoc(categorysRef, {
+        name: data.name,
+        url: data.url
+      });
+      dispatch({ type: ActionTypes.EDIT_CATEGORY, payload: data })
+    } else {
+      console.log("error");
+      const Categortdel = ref(storage, 'categorys/' + data.FileName);
 
-    await updateDoc(categorysRef, {
-      name: data.name,
-    });
-    dispatch({ type: ActionTypes.EDIT_CATEGORY, payload: data })
+      deleteObject(Categortdel).then(async () => {
+        let image = Math.floor(Math.random() * 1000000).toString();
+        const productRef = ref(storage, 'categorys/' + image)
 
+        uploadBytes(productRef, data.file)
+          .then((snapshot) => {
+            getDownloadURL(snapshot.ref)
+              .then(async (url) => {
+                await updateDoc(categorysRef,{
+                  name: data.name,
+                  url: url,
+                  FileName: image
+                });
+                dispatch({
+                  type: ActionTypes.EDIT_CATEGORY, payload:{
+                    ...data, url:url,
+                    FileName: image
+                  }
+                })
+              })
+          })
+      })
+    }
   } catch (error) {
     dispatch(errorCategory(error.message))
   }

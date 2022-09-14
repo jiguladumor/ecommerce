@@ -26,8 +26,8 @@ export default function Category() {
   const [dopen, setDopen] = React.useState(false);
   const [did, setDid] = useState()
   const dispatch = useDispatch();
-  const categorys = useSelector(state => state.category) 
-  // console.log(categorys);
+  const categorys = useSelector(state => state.category)
+  console.log(categorys);
 
   const handleClickDopen = (id) => {
     setDopen(true);
@@ -62,7 +62,7 @@ export default function Category() {
     },
     validationSchema: schema,
     onSubmit: (value, { resetForm }) => {
-      if(Update) {
+      if (Update) {
         handleupdate(value)
       } else {
         handleSubmitdata(value)
@@ -70,10 +70,11 @@ export default function Category() {
       resetForm();
     }
   })
-  
+
   const handleupdate = (value) => {
+    console.log(value);
     // let localdata = JSON.parse(localStorage.getItem("category"));
-    
+
     // let udata = localdata.map((l, i) => {
     //   if(l.id === value.id) {
     //       return value;
@@ -93,7 +94,7 @@ export default function Category() {
 
   const handleSubmitdata = (values) => {
     // console.log(values);
-    let localdata = JSON.parse(localStorage.getItem("category"))
+    // let localdata = JSON.parse(localStorage.getItem("category"))
 
     // let data = {
     //   id: Math.floor(Math.random() * 1000),
@@ -116,13 +117,14 @@ export default function Category() {
   }
 
   const columns = [
-    
+
     { field: 'id', headerName: 'ID', width: 70 },
     { field: 'name', headerName: 'Name', width: 130 },
-    { field: 'url', headerName: 'image', width: 130,
+    {
+      field: 'url', headerName: 'image', width: 130,
 
       renderCell: (params) => (
-        <img  src={params.row.url} width={50} height={50} />
+        <img src={params.row.url} width={50} height={50} />
       )
 
     },
@@ -173,7 +175,7 @@ export default function Category() {
     // let localData = JSON.parse(localStorage.getItem("category"))
 
     // if (localData !== null) {
-      setData(categorys.category)
+    setData(categorys.category)
     // }
   }
 
@@ -185,15 +187,16 @@ export default function Category() {
     },
     [])
 
-    console.log(categorys.category);
+  console.log(categorys.category);
+  // console.log(formik.errors);
+
   return (
     <>
-
       <Box>
         <Container>
           <div>
-          <Button variant="outlined" onClick={() => handleClickOpen()}>
-              Add data
+            <Button variant="outlined" onClick={() => handleClickOpen()}>
+              Add category
             </Button>
             <div style={{ height: 400, width: '100%' }}>
               <DataGrid
@@ -205,7 +208,7 @@ export default function Category() {
               />
             </div>
             <Dialog open={open} onClose={handleClose}>
-              <DialogTitle>Add data</DialogTitle>
+              <DialogTitle>Add category</DialogTitle>
               <Formik value={formik}>
                 <Form onSubmit={formik.handleSubmit}>
                   <DialogContent>
@@ -214,6 +217,7 @@ export default function Category() {
                       margin="dense"
                       id="name"
                       label="name"
+                      name='name'
                       type="name"
                       fullWidth
                       variant="standard"
@@ -223,52 +227,50 @@ export default function Category() {
                       error={formik.errors.name ? true : false}
                     />
                     <input
-                    type="file"
-                    name="file"
-                    id="file"
-                    fullWidth
-                    variant="standard"
-                    onChange={e => formik.setFieldValue("file", e.target.files[0])}
-                  
-                  />
+                      type="file"
+                      name="file"
+                      id="file"
+                      fullWidth
+                      variant="standard"
+                      onChange={e => formik.setFieldValue("file", e.target.files[0])}
+                    />
                   </DialogContent>
                   <DialogActions>
-                  <Button onClick={handleClose}>Cancel</Button>
+                    <Button onClick={handleClose}>Cancel</Button>
                     {
                       Update ?
-                      <Button type="submit">Update</Button>
-                       :
-                      <Button type="submit">Submit</Button>
+                        <Button type="submit">Update</Button>
+                        :
+                        <Button type="submit">Submit</Button>
                     }
                   </DialogActions>
                 </Form>
               </Formik>
             </Dialog>
             <div>
-            <Dialog
-              open={dopen}
-              onClose={handleClose}
-              aria-labelledby="alert-dialog-title"
-              aria-describedby="alert-dialog-description"
-            >
-              <DialogTitle id="alert-dialog-title">
-                {"Are You Sure Delete  Data ...? "}
-              </DialogTitle>
-              <DialogContent>
-                <DialogContentText id="alert-dialog-description">
+              <Dialog
+                open={dopen}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+              >
+                <DialogTitle id="alert-dialog-title">
+                  {"Are You Sure Delete  Data ...? "}
+                </DialogTitle>
+                <DialogContent>
+                  <DialogContentText id="alert-dialog-description">
 
-                </DialogContentText>
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={() => handleDelete()}>yes</Button>
-                <Button onClick={handleClose}>No</Button>
-              </DialogActions>
-            </Dialog>
-          </div>
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={() => handleDelete()}>yes</Button>
+                  <Button onClick={handleClose}>No</Button>
+                </DialogActions>
+              </Dialog>
+            </div>
           </div>
         </Container>
       </Box>
-
     </>
   )
 }
