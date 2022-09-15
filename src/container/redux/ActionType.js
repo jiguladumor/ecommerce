@@ -1,5 +1,13 @@
+// category
 export const GET_CATEGORY = "GET_CATEGORY"
 export const ADD_CATEGORY = "ADD_CATEGORY"
 export const DELETE_CATEGORY = "DELETE_CATEGORY"
 export const EDIT_CATEGORY = "EDIT_CATEGORY"
 export const ERROR_CATEGORY = "ERROR_CATEGORY"
+
+// product
+export const GET_PRODUCT = "GET_PRODUCT"
+export const ADD_PRODUCT = "ADD_PRODUCT"
+export const DELETE_PRODUCT = "DELETE_PRODUCT"
+export const EDIT_PRODUCT = "EDIT_PRODUCT"
+export const ERROR_PRODUCT = "ERROR_PRODUCT"

@@ -3,47 +3,49 @@ import { db, storage } from "../../../Firebase";
 import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from "firebase/firestore";
 import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
-export const Categorydata = (data) => async (dispatch) => {
+export const Productdata = (data) => async (dispatch) => {
   // console.log(data);
   try {
     let data = []
-    const querySnapshot = await getDocs(collection(db, "categorys"));
+    const querySnapshot = await getDocs(collection(db, "products"));
 
     querySnapshot.forEach((doc) => {
       data.push({ id: doc.id, ...doc.data() })
-      dispatch({ type: ActionTypes.GET_CATEGORY, payload: data })
+      dispatch({ type: ActionTypes.GET_PRODUCT, payload: data })
       // console.log(`${doc.id} => ${doc.data()}`);
     });
 
   } catch (error) {
-    dispatch(errorCategory(error.message))
+    dispatch(errorProduct(error.message))
     console.log(error.message);
   }
 }
 
-export const addCategory = (data) => (dispatch) => {
+export const addProduct = (data) => (dispatch) => {
   console.log(data);
   try {
 
     //  const docRef = await addDoc(collection(db, " doctors"),{id:docRef.id, ...data});
     const rendomName = Math.floor(Math.random() * 10000000).toString();
     console.log(rendomName);
-    const categorysRef = ref(storage, 'categorys/' + rendomName);
+    const productsRef = ref(storage, 'products/' + rendomName);
 
-    uploadBytes(categorysRef, data.file)
+    uploadBytes(productsRef, data.file)
       .then((snapshot) => {
         // console.log('Uploaded a blob or file!');
         getDownloadURL(snapshot.ref)
           .then(async (url) => {
-            const docRef = await addDoc(collection(db, "categorys"), {
+            const docRef = await addDoc(collection(db, "products"), {
               name: data.name,
+              price: data.price,
               url: url,
               FileName: rendomName
             });
             dispatch({
-              type: ActionTypes.ADD_CATEGORY, payload: {
+              type: ActionTypes.ADD_PRODUCT, payload: {
                 id: docRef.id,
                 name: data.name,
+                price: data.price,
                 url: url,
                 FileName: rendomName
               }
@@ -52,62 +54,65 @@ export const addCategory = (data) => (dispatch) => {
       });
 
   } catch (error) {
-    dispatch(errorCategory(error.message));
+    dispatch(errorProduct(error.message));
     // console.error("Error adding document: ", error);
   }
 }
 
 
-export const deletecategory = (data) => async (dispatch) => {
+export const deleteproduct = (data) => async (dispatch) => {
   console.log(data);
   try {
-    const categorysRef = ref(storage, 'categorys/' + data.FileName);
-    // console.log(categorysRef);
-    deleteObject(categorysRef).then(async () => {
-      await deleteDoc(doc(db, "categorys", data.id));
-      dispatch({ type: ActionTypes.DELETE_CATEGORY, payload: data.id })
+    const productsRef = ref(storage, 'products/' + data.FileName);
+    // console.log(productsRef);
+    deleteObject(productsRef).then(async () => {
+      await deleteDoc(doc(db, "products", data.id));
+      dispatch({ type: ActionTypes.DELETE_PRODUCT, payload: data.id })
     }).catch((error) => {
-      dispatch(errorCategory(error.message))
+      dispatch(errorProduct(error.message))
     });
   }
   catch (error) {
-    dispatch(errorCategory(error.message))
+    dispatch(errorProduct(error.message))
   }
 }
 
-export const editcategory = (data) => async (dispatch) => {
+export const editproduct = (data) => async (dispatch) => {
   console.log(data);
   
   try {
-    const categorysRef = doc(db, "categorys", data.id);
+    const productsRef = doc(db, "products", data.id);
     if (typeof data.file === "string") { 
       console.log("only data");
-      await updateDoc(categorysRef, {
+      await updateDoc(productsRef, {
         name: data.name,
+        price: data.price,
         url: data.url
       });
       dispatch({ type: ActionTypes.EDIT_CATEGORY, payload: data })
     } else {
       console.log("error");
-      const Categortdel = ref(storage, 'categorys/' + data.FileName);
+      const Productdel = ref(storage, 'products/' + data.FileName);
 
-      deleteObject(Categortdel).then(async () => {
+      deleteObject(Productdel).then(async () => {
         let image = Math.floor(Math.random() * 1000000).toString();
-        const product = ref(storage, 'categorys/' + image)
+        const productRef = ref(storage, 'products/' + image)
 
-        uploadBytes(product, data.file)
+        uploadBytes(productRef, data.file)
           .then((snapshot) => {
             getDownloadURL(snapshot.ref)
               .then(async (url) => {
-                await updateDoc(categorysRef,{
+                await updateDoc(productsRef,{
                   name: data.name,
+                  price: data.price,
                   url: url,
                   FileName: image
                 });
                 dispatch({
-                  type: ActionTypes.EDIT_CATEGORY, payload:{
-                    ...data, url:url,
-                    FileName: image
+                  type: ActionTypes.EDIT_PRODUCT, payload:{
+                    ...data,
+                     url:url,
+                    FileName: image,
                   }
                 })
               })
@@ -115,11 +120,11 @@ export const editcategory = (data) => async (dispatch) => {
       })
     }
   } catch (error) {
-    dispatch(errorCategory(error.message))
+    dispatch(errorProduct(error.message))
   }
 }
 
 
-export const errorCategory = (error) => (dispatch) => {
-  dispatch({ type: ActionTypes.ERROR_CATEGORY, payload: error })
+export const errorProduct = (error) => (dispatch) => {
+  dispatch({ type: ActionTypes.ERROR_PRODUCT, payload: error })
 }
