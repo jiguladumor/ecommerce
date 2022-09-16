@@ -38,6 +38,7 @@ export const addProduct = (data) => (dispatch) => {
             const docRef = await addDoc(collection(db, "products"), {
               name: data.name,
               price: data.price,
+              categoryname: data.categoryname,
               url: url,
               FileName: rendomName
             });
@@ -46,6 +47,7 @@ export const addProduct = (data) => (dispatch) => {
                 id: docRef.id,
                 name: data.name,
                 price: data.price,
+                categoryname: data.categoryname,
                 url: url,
                 FileName: rendomName
               }
@@ -87,6 +89,7 @@ export const editproduct = (data) => async (dispatch) => {
       await updateDoc(productsRef, {
         name: data.name,
         price: data.price,
+        categoryname: data.categoryname,
         url: data.url
       });
       dispatch({ type: ActionTypes.EDIT_CATEGORY, payload: data })
@@ -105,6 +108,7 @@ export const editproduct = (data) => async (dispatch) => {
                 await updateDoc(productsRef,{
                   name: data.name,
                   price: data.price,
+                  category: data.category,
                   url: url,
                   FileName: image
                 });

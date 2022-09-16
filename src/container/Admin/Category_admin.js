@@ -16,7 +16,7 @@ import { DialogContentText, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CreateIcon from '@mui/icons-material/Create';
 import { useDispatch, useSelector } from 'react-redux';
-import { addCategory, Categorydata, deletecategory, editcategory } from '../redux/action/category.action';
+import { addCategory,Categorydata, deletecategory, editcategory } from '../redux/action/category.action';
 
 
 export default function Category() {
@@ -49,7 +49,7 @@ export default function Category() {
 
 
   let datad = {
-    name: yup.string().required('enter name'),
+    categoryname: yup.string().required('enter name'),
     file: yup.mixed().required('please select file'),
   }
 
@@ -57,7 +57,7 @@ export default function Category() {
 
   const formik = useFormik({
     initialValues: {
-      name: '',
+      categoryname: '',
       file: ''
     },
     validationSchema: schema,
@@ -119,7 +119,7 @@ export default function Category() {
   const columns = [
 
     { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'name', headerName: 'Name', width: 130 },
+    { field: 'categoryname', headerName: 'Name', width: 130 },
     {
       field: 'url', headerName: 'image', width: 130,
 
@@ -215,16 +215,16 @@ export default function Category() {
                     <TextField
                       autoFocus
                       margin="dense"
-                      id="name"
-                      label="name"
-                      name='name'
-                      type="name"
+                      id="categoryname"
+                      label="categoryname"
+                      name='categoryname'
+                      type="categoryname"
                       fullWidth
                       variant="standard"
                       onChange={formik.handleChange}
-                      defaultValue={formik.values.name}
-                      helperText={formik.errors.name}
-                      error={formik.errors.name ? true : false}
+                      defaultValue={formik.values.categoryname}
+                      helperText={formik.errors.categoryname}
+                      error={formik.errors.categoryname ? true : false}
                     />
                     <input
                       type="file"

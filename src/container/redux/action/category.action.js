@@ -36,14 +36,14 @@ export const addCategory = (data) => (dispatch) => {
         getDownloadURL(snapshot.ref)
           .then(async (url) => {
             const docRef = await addDoc(collection(db, "categorys"), {
-              name: data.name,
+              categoryname: data.categoryname,
               url: url,
               FileName: rendomName
             });
             dispatch({
               type: ActionTypes.ADD_CATEGORY, payload: {
                 id: docRef.id,
-                name: data.name,
+                categoryname: data.categoryname,
                 url: url,
                 FileName: rendomName
               }
@@ -83,7 +83,7 @@ export const editcategory = (data) => async (dispatch) => {
     if (typeof data.file === "string") { 
       console.log("only data");
       await updateDoc(categorysRef, {
-        name: data.name,
+        categoryname: data.categoryname,
         url: data.url
       });
       dispatch({ type: ActionTypes.EDIT_CATEGORY, payload: data })
@@ -100,7 +100,7 @@ export const editcategory = (data) => async (dispatch) => {
             getDownloadURL(snapshot.ref)
               .then(async (url) => {
                 await updateDoc(categorysRef,{
-                  name: data.name,
+                  categoryname: data.categoryname,
                   url: url,
                   FileName: image
                 });

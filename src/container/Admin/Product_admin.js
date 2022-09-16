@@ -28,7 +28,8 @@ export default function Product() {
   const dispatch = useDispatch();
   const products = useSelector(state => state.product)
   const categorydata = useSelector(state => state.category)
-  console.log(products);
+
+  // console.log(products);
 
   const handleClickDopen = (id) => {
     setDopen(true);
@@ -52,6 +53,7 @@ export default function Product() {
   let datad = {
     name: yup.string().required('enter name'),
     price: yup.number().required('enter price'),
+    categoryname: yup.string().required('please enter your categoryname'),
     file: yup.mixed().required('please select file'),
   }
 
@@ -61,6 +63,7 @@ export default function Product() {
     initialValues: {
       name: '',
       price:'',
+      categoryname:'',
       file: ''
     },
     validationSchema: schema,
@@ -124,6 +127,7 @@ export default function Product() {
     { field: 'id', headerName: 'ID', width: 70 },
     { field: 'name', headerName: 'Name', width: 130 },
     { field: 'price', headerName: 'Price', width: 130 },
+    { field: 'categoryname', headerName: 'Categoryname', width: 130 },
     {
       field: 'url', headerName: 'image', width: 130,
 
@@ -246,12 +250,12 @@ export default function Product() {
                     />
                     <select onChange={formik.handleChange} name="categoryname" className='form-select' >
                       {
-                        categorydata.category.map((values)=> {
-                          const{id, name} = values
-                          console.log(name);
+                        categorydata.category.map((k)=> {
+                          // const{id, name} = k
+                          console.log(k.categoryname);
                           return (
-                            <option value={name}>
-                              {name}
+                            <option value={k.id}>
+                              {k.categoryname}
                             </option>
                           )
                         })
