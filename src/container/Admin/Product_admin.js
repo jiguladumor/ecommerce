@@ -56,6 +56,7 @@ export default function Product() {
     categoryname: yup.string().required('please enter your categoryname'),
     file: yup.mixed().required('please select file'),
   }
+ 
 
   let schema = yup.object().shape(datad);
 
@@ -198,6 +199,7 @@ export default function Product() {
   console.log(products.product);
   // console.log(formik.errors);
 
+
   return (
     <>
       <Box>
@@ -237,6 +239,7 @@ export default function Product() {
                     <TextField
                       autoFocus
                       margin="dense"
+                      className='space1'
                       id="price"
                       label="price"
                       name='price'
@@ -248,11 +251,15 @@ export default function Product() {
                       helperText={formik.errors.price}
                       error={formik.errors.price ? true : false}
                     />
-                    <select onChange={formik.handleChange} name="categoryname" className='form-select' >
+                    <select 
+                      onChange={formik.handleChange} 
+                      name="categoryname" 
+                      className='form-select space' >
+                      
                       {
                         categorydata.category.map((k)=> {
                           // const{id, name} = k
-                          console.log(k.categoryname);
+                           
                           return (
                             <option value={k.id}>
                               {k.categoryname}
@@ -269,6 +276,9 @@ export default function Product() {
                       fullWidth
                       variant="standard"
                       onChange={e => formik.setFieldValue("file", e.target.files[0])}
+                      defaultValue={formik.values.file}
+                      helperText={formik.errors.file}
+                      error={formik.errors.file ? true : false}
                     />
                   </DialogContent>
                   <DialogActions>

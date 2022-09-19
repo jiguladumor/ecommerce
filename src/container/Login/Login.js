@@ -5,9 +5,19 @@ import { useFormik } from "formik";
 export default function Login() {
   const [usertype, setuserType] = useState("Login");
   const [password, setpassword] = useState(false);
-  const handleLogin = () => {};
-  const handleSignup = () => {};
-  const passwordchng = () => {};
+
+  const handleLogin = () => {
+
+  };
+
+  const handleSignup = () => {
+
+  };
+
+  const passwordchng = () => {
+    
+  };
+
 
   let Login = {
     email: yup
