@@ -41,10 +41,10 @@ function Header(props) {
                                         <NavLink exact to={"/Shope"} ClassName="nav-link scrollto active">Shop <i
                                         className="fa fa-angle-down ms-2" aria-hidden="true"></i></NavLink>
                                 </li>
-                                <li className="nav-item">
+                                {/* <li className="nav-item">
                                         <NavLink exact to={"/Product"} ClassName="nav-link scrollto active">Product <i
                                         className="fa fa-angle-down ms-2" aria-hidden="true"></i></NavLink>
-                                </li>
+                                </li> */}
                                 <li className="nav-item">
                                     {/* <a className="nav-link text-dark" href="blog.html">Blog<i className="fa fa-angle-down ms-2"
                                         aria-hidden="true"></i></a> */}

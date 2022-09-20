@@ -100,7 +100,7 @@ export default function Product() {
   }
 
   const handleSubmitdata = (values) => {
-    // console.log(values);
+    console.log(values);
     // let localdata = JSON.parse(localStorage.getItem("product"))
 
     // let data = {

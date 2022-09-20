@@ -1,45 +1,47 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { Productdata } from '../redux/action/product.action';
+// import React, { useEffect, useState } from 'react'
+// import { useDispatch, useSelector } from 'react-redux';
+// import { Productdata } from '../redux/action/product.action';
 
-export default function Product() {
-  const dispatch = useDispatch();
-  const [product, setproduct] = useState([]);
-  const products = useSelector(state => state.product);
-  console.log(products);
-  
+// export default function Product() {
+//   const dispatch = useDispatch();
+//   const [product, setproduct] = useState([]);
+//   const products = useSelector(state => state.product);
+//   console.log(products);
 
-  useEffect(() => {
-    dispatch(Productdata());
-    setproduct(products.product);
-  },
-  [])
 
-  let finalData = product.length > 0 ? product : products.product;
+//   useEffect(() => {
+//     dispatch(Productdata());
+//     setproduct(products.product);
+//   },
+//     [])
 
-  console.log(finalData);
+//   let finalData = product.length > 0 ? product : products.product;
 
-  return (
-    <>
-      {
-        finalData && finalData.map((values, index) => {
-          console.log(values);
-          return (
-            <>
-              <div className='row'>
+//   console.log(finalData);
 
-                <img className='pb-5 w-200' src={values.url} width="50%"/>
+//   return (
+//     <>
+//       {
+//         finalData && finalData.map((values, index) => {
+//           console.log(values);
+//           return (
+//             <>
+//               <div className='main_row'>
+//                 <div className='row images'>
 
-                <div className=''>
-                  <h6>Name:{values.name}</h6>
-                  <p>price:{values.price}</p>
-                  <p>Category:{values.categoryname}</p>
-                </div>
-              </div>
-            </>
-          )
-        })
-      }
-    </>
-  )
-}
+//                   <img className='pb-5' src={values.url} />
+
+//                   <div className='row images'>
+//                     <h6>Name:{values.name}</h6>
+//                     <p>price:{values.price}</p>
+//                     <p>Category:{values.categoryname}</p>
+//                   </div>
+//                 </div>
+//               </div>
+//             </>
+//           )
+//         })
+//       }
+//     </>
+//   )
+// }

@@ -1,6 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Productdata } from '../redux/action/product.action';
 
 function Home(props) {
+    const dispatch = useDispatch();
+    const [product, setproduct] = useState([]);
+    const products = useSelector(state => state.product);
+    console.log(products);
+
+    const handleProductDetails = (values) => {
+        console.log(values);
+    }
+
+    useEffect(() => {
+        dispatch(Productdata());
+        setproduct(products.product);
+    },
+        [])
+
+    let finalData = product.length > 0 ? product : products.product;
+
+    console.log(finalData);
+
     return (
         // < !------------------banner-------------->
         <div>
@@ -158,6 +179,33 @@ function Home(props) {
                             <button className="btn rounded-pill border ms-2" id="Featured" data-bs-toggle="tab" data-bs-target="#Featured" type="button" role="tab" aria-controls="Featured" aria-selected="true">Featured</button>
                             <button className="btn rounded-pill border" id="Top Rated" data-bs-toggle="tab" data-bs-target="#Top Rated" type="button" role="tab" aria-controls="Top Rated" aria-selected="true">Top Rated</button>
                         </div>
+                        {/* react js */}
+                        {
+                           finalData.map((values, index) => {
+                                console.log(values);
+                                return (
+                                    <>
+                                        
+                                            <div className='row pt-5 Products'>
+                                                <div className="col-lg-3">
+                                                    <div className="product-main text-center fade show active">
+                                                        <div className="product-box">
+                                                            <img src={values.url} className="img-fluid" />
+                                                        </div>
+                                                        <div className="product-meta pt-4">
+                                                            {/* <p className="mb-2">Men / Women</p> */}
+                                                            <h3 className="text-dark fs-4 fw-bold pb-1">{values.name}</h3>
+                                                            <span className="fw-bold">price:{values.price}</span>
+                                                            <button onClick={() => handleProductDetails(values)}>Read More....</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                       
+                                    </>
+                                )
+                            })
+                        }
                         <div className="row pt-5 Products">
                             <div className="col-lg-3">
                                 <div className="product-main text-center fade show active">

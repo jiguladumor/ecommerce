@@ -9,7 +9,6 @@ import Shope from './container/Shope/Shope';
 import Login from './container/Login/Login';
 import Category_admin from './container/Admin/Category_admin'
 import Product_admin from './container/Admin/Product_admin';
-import Product from './container/Admin/Product';
 import { Provider } from 'react-redux';
 import { store } from './container/redux/Store';
 
@@ -25,8 +24,7 @@ function App() {
         <Route exact path={"/Home"} component={Home} />
         <Route exact path={"/About"} component={About} />
         <Route exact path={"/Blog"} component={Blog} />
-        <Route exact path={"/Shope"} component={Shope} />
-        <Route exact path={"/Product"} component={Product} />
+        <Route exact path={"/Shope"} component={Shope} />    
         <Route exact path={"/Login"} component={Login} />
         <Route exact path={"/Category_admin"} component={Category_admin} />
         <Route exact path={"/Product_admin"} component={Product_admin} />
