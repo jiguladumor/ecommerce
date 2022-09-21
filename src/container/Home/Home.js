@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Categorydata } from '../redux/action/category.action';
 import { Productdata } from '../redux/action/product.action';
 
 function Home(props) {
     const dispatch = useDispatch();
     const [product, setproduct] = useState([]);
+    const [category, setcategory] = useState([]);
+
     const products = useSelector(state => state.product);
-    console.log(products);
+
+    const categorys = useSelector(state => state.category);
+    console.log(categorys);
 
     const handleProductDetails = (values) => {
         console.log(values);
@@ -14,13 +19,18 @@ function Home(props) {
 
     useEffect(() => {
         dispatch(Productdata());
+        dispatch(Categorydata());
         setproduct(products.product);
+        setcategory(categorys.category)
     },
         [])
 
     let finalData = product.length > 0 ? product : products.product;
 
     console.log(finalData);
+
+    let categorydata = category.length > 0 ? category : categorys.category;
+    console.log(categorydata);
 
     return (
         // < !------------------banner-------------->
@@ -123,6 +133,37 @@ function Home(props) {
                     </div>
                 </div>
                 {/*----------------collection------------*/}
+                {/* Category_admin */}
+                <div className="collection">
+                    <div className="container">
+                        {
+                            categorydata.map((v, i) => {
+                                console.log(v);
+                                return (
+                                    <>
+                                        <div className="row">
+                                            <div className="col-lg-4">
+                                                <div className="mega-hover collection-relative position-relative">
+                                                    <div className="collection-new position-relative">
+                                                        <img src={v.url} className="img-fluid" />
+                                                        <div className="collection-text position-absolute">
+                                                            <h3 className="text-uppercase fs-4">{v.categoryname}</h3>
+                                                        </div>
+                                                        <div className="collections-btn position-absolute">
+                                                            <button className="btn">Explore All</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </>
+                                )
+                            })
+                        }
+                    </div>
+                </div>
+
                 <section className="collection">
                     <div className="container">
                         <div className="row">
@@ -180,12 +221,12 @@ function Home(props) {
                             <button className="btn rounded-pill border" id="Top Rated" data-bs-toggle="tab" data-bs-target="#Top Rated" type="button" role="tab" aria-controls="Top Rated" aria-selected="true">Top Rated</button>
                         </div>
                         {/* react js */}
-                        {
-                           finalData.map((values, index) => {
-                                console.log(values);
-                                return (
-                                    <>
-                                        
+                        <div className=''>
+                            {
+                                finalData.map((values, index) => {
+                                    console.log(values);
+                                    return (
+                                        <>
                                             <div className='row pt-5 Products'>
                                                 <div className="col-lg-3">
                                                     <div className="product-main text-center fade show active">
@@ -195,17 +236,18 @@ function Home(props) {
                                                         <div className="product-meta pt-4">
                                                             {/* <p className="mb-2">Men / Women</p> */}
                                                             <h3 className="text-dark fs-4 fw-bold pb-1">{values.name}</h3>
-                                                            <span className="fw-bold">price:{values.price}</span>
+                                                            <span className="fw-bold">price : {values.price}</span>{<br />}
                                                             <button onClick={() => handleProductDetails(values)}>Read More....</button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                       
-                                    </>
-                                )
-                            })
-                        }
+
+                                        </>
+                                    )
+                                })
+                            }
+                        </div>
                         <div className="row pt-5 Products">
                             <div className="col-lg-3">
                                 <div className="product-main text-center fade show active">
