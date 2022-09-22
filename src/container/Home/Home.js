@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
+import { Navbar } from 'reactstrap';
 import { Categorydata } from '../redux/action/category.action';
 import { Productdata } from '../redux/action/product.action';
 
@@ -7,15 +9,43 @@ function Home(props) {
     const dispatch = useDispatch();
     const [product, setproduct] = useState([]);
     const [category, setcategory] = useState([]);
+    const history = useHistory();
 
     const products = useSelector(state => state.product);
 
     const categorys = useSelector(state => state.category);
     console.log(categorys);
 
-    const handleProductDetails = (values) => {
-        console.log(values);
+    const uniqueList = [
+        "ALL",
+        ...new Set(
+            products.product.map((curElem) => {
+                return curElem.categoryname
+            })
+        )
+    ]
+
+    const filterItem = (categoryname) => {
+        console.log("categoryname", categoryname);
+        if (categoryname === "ALL") {
+            setproduct(products);
+            return;
+        }
     }
+
+    // const updateList = products.product.filter((curElem1, i) => {
+    //     return (
+    //         curElem1.categoryname === categoryname
+    //     )
+    //     setproduct(updateList);
+    //     console.log("updateList", updateList);
+    // })
+
+    const handleProductDetails = (values) => {
+        // console.log(values);
+        history.push("/ProductDetails", values);
+    }
+
 
     useEffect(() => {
         dispatch(Productdata());
@@ -136,18 +166,19 @@ function Home(props) {
                 {/* Category_admin */}
                 <div className="collection">
                     <div className="container">
-                        {
-                            categorydata.map((v, i) => {
-                                console.log(v);
-                                return (
-                                    <>
-                                        <div className="row">
+                        <div className="row">
+                            {
+                                categorydata.map((v, i) => {
+                                    console.log(v);
+                                    return (
+                                        <>
+
                                             <div className="col-lg-4">
                                                 <div className="mega-hover collection-relative position-relative">
                                                     <div className="collection-new position-relative">
                                                         <img src={v.url} className="img-fluid" />
-                                                        <div className="collection-text position-absolute">
-                                                            <h3 className="text-uppercase fs-4">{v.categoryname}</h3>
+                                                        <div className="collection-text ">
+                                                            <h3 className="text-uppercase fs-4 me-5">{v.categoryname}</h3>
                                                         </div>
                                                         <div className="collections-btn position-absolute">
                                                             <button className="btn">Explore All</button>
@@ -155,16 +186,17 @@ function Home(props) {
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                    </>
-                                )
-                            })
-                        }
+
+                                        </>
+                                    )
+                                })
+                            }
+                        </div>
                     </div>
                 </div>
 
-                <section className="collection">
+                {/* <section className="collection">
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-4">
@@ -208,7 +240,7 @@ function Home(props) {
                             </div>
                         </div>
                     </div>
-                </section>
+                </section> */}
                 {/*----------------Top Products----------------*/}
                 <section className="product">
                     <div className="container">
@@ -217,38 +249,40 @@ function Home(props) {
                         </div>
                         <div className="product-btn text-center pt-4">
                             <button className="btn text-white rounded-pill ms-2" id="New Arrival" data-bs-toggle="tab" data-bs-target="#New Arrival" type="button" role="tab" aria-controls="New Arrival" aria-selected="true">New Arrival</button>
-                            <button className="btn rounded-pill border ms-2" id="Featured" data-bs-toggle="tab" data-bs-target="#Featured" type="button" role="tab" aria-controls="Featured" aria-selected="true">Featured</button>
-                            <button className="btn rounded-pill border" id="Top Rated" data-bs-toggle="tab" data-bs-target="#Top Rated" type="button" role="tab" aria-controls="Top Rated" aria-selected="true">Top Rated</button>
+                            {/* <button className="btn rounded-pill border ms-2" id="Featured" data-bs-toggle="tab" data-bs-target="#Featured" type="button" role="tab" aria-controls="Featured" aria-selected="true">Featured</button>
+                            <button className="btn rounded-pill border" id="Top Rated" data-bs-toggle="tab" data-bs-target="#Top Rated" type="button" role="tab" aria-controls="Top Rated" aria-selected="true">Top Rated</button> */}
                         </div>
                         {/* react js */}
-                        <div className=''>
-                            {
-                                finalData.map((values, index) => {
-                                    console.log(values);
-                                    return (
-                                        <>
-                                            <div className='row pt-5 Products'>
+                        {
+                            <Navbar filterItem={filterItem} uniqueList={uniqueList} />
+                        }
+                        <div className='container'>
+                            <div className='row Products'>
+                                {
+                                    finalData.map((values, index) => {
+                                        console.log(values);
+                                        return (
+                                            <>
                                                 <div className="col-lg-3">
                                                     <div className="product-main text-center fade show active">
                                                         <div className="product-box">
-                                                            <img src={values.url} className="img-fluid" />
+                                                            <img src={values.url} className="img-fluid1" />
                                                         </div>
                                                         <div className="product-meta pt-4">
                                                             {/* <p className="mb-2">Men / Women</p> */}
                                                             <h3 className="text-dark fs-4 fw-bold pb-1">{values.name}</h3>
                                                             <span className="fw-bold">price : {values.price}</span>{<br />}
-                                                            <button onClick={() => handleProductDetails(values)}>Read More....</button>
+                                                            <button className='w-50 btmargin' onClick={() => handleProductDetails(values)}>Read More....</button>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-
-                                        </>
-                                    )
-                                })
-                            }
+                                            </>
+                                        )
+                                    })
+                                }
+                            </div>
                         </div>
-                        <div className="row pt-5 Products">
+                        {/* <div className="row pt-5 Products">
                             <div className="col-lg-3">
                                 <div className="product-main text-center fade show active">
                                     <div className="product-box">
@@ -309,7 +343,7 @@ function Home(props) {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </section>
                 {/*--------------video-----------*/}
