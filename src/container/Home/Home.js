@@ -26,7 +26,7 @@ function Home(props) {
     ]
 
     const filterItem = (categoryname) => {
-        console.log("categoryname", categoryname);
+        // console.log("categoryname", categoryname);
         if (categoryname === "ALL") {
             setproduct(products);
             return;
@@ -48,8 +48,7 @@ function Home(props) {
 
 
     useEffect(() => {
-        dispatch(Productdata());
-        dispatch(Categorydata());
+        dispatch(Productdata(),Categorydata());  
         setproduct(products.product);
         setcategory(categorys.category)
     },
@@ -169,7 +168,7 @@ function Home(props) {
                         <div className="row">
                             {
                                 categorydata.map((v, i) => {
-                                    console.log(v);
+                                    // console.log(v);
                                     return (
                                         <>
 
@@ -186,7 +185,6 @@ function Home(props) {
                                                     </div>
                                                 </div>
                                             </div>
-
 
                                         </>
                                     )
@@ -266,13 +264,12 @@ function Home(props) {
                                                 <div className="col-lg-3">
                                                     <div className="product-main text-center fade show active">
                                                         <div className="product-box">
-                                                            <img src={values.url} className="img-fluid1" />
+                                                            <img src={values.url} className="img-fluid1" onClick={() => handleProductDetails(values)} />
                                                         </div>
                                                         <div className="product-meta pt-4">
                                                             {/* <p className="mb-2">Men / Women</p> */}
                                                             <h3 className="text-dark fs-4 fw-bold pb-1">{values.name}</h3>
-                                                            <span className="fw-bold">price : {values.price}</span>{<br />}
-                                                            <button className='w-50 btmargin' onClick={() => handleProductDetails(values)}>Read More....</button>
+                                                            <span className="fw-bold">price : {values.price}</span>{<br/>}
                                                         </div>
                                                     </div>
                                                 </div>

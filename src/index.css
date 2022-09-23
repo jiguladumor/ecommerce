@@ -42,3 +42,12 @@ margin: 10px 0 5px 0;
   display: flex;
   justify-content: center;
 }
+.cartbtn{
+  border: none;
+  width: 80%;
+  height: 45px;
+  font-size: 18px;
+  font-family:Roboto,Arial,sans-serif;
+  text-transform: uppercase;
+  margin: 15px;
+}
