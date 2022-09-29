@@ -12,6 +12,7 @@ import Product_admin from './container/Admin/Product_admin';
 import { Provider } from 'react-redux';
 import { store } from './container/redux/Store';
 import ProductDetails from './container/Admin/ProductDetails';
+import Addtocart from './container/Admin/Addtocart';
 
 
 
@@ -30,6 +31,7 @@ function App() {
         <Route exact path={"/Category_admin"} component={Category_admin} />
         <Route exact path={"/Product_admin"} component={Product_admin} />
         <Route exact path={"/ProductDetails"} component={ProductDetails} />
+        <Route exact path={"/Addtocart"} component={Addtocart} />
        </Switch>
      </Provider>
       <Footer />

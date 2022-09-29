@@ -163,6 +163,7 @@ function Home(props) {
                 </div>
                 {/*----------------collection------------*/}
                 {/* Category_admin */}
+                
                 <div className="collection">
                     <div className="container">
                         <div className="row">
