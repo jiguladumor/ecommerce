@@ -1,6 +1,9 @@
 import * as ActionTypes from "../ActionType"
 
-export const addCart = (d) => (dispech) => {
+export const 
+addCart = (d) => (dispech) => {
+    // dispech({type:ActionTypes.ADD_CART, payload:d})
+    
     dispech({type:ActionTypes.ADD_CART, payload:{id:d.id,qty:1}})
 }
 

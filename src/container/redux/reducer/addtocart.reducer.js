@@ -7,6 +7,7 @@ const initalState = {
 }
 
 export const AddtocartReducer = (state = initalState, action) => {
+    console.log(action.payload , state.cart);
     switch (action.type) {
         case ActionTypes.ADD_CART:
             return {
@@ -25,7 +26,7 @@ export const AddtocartReducer = (state = initalState, action) => {
                         return(
                             {
                                 id:c.id,
-                                quantity:c.quantity + 1
+                                quantity: c.quantity + 1
                             }
                         )
                     } else {

@@ -7,7 +7,7 @@ import { addCart } from '../redux/action/addtocart.action';
 export default function ProductDetails(props) {
     const history = useHistory();
     const productvalue = [props.location.state]
-    const [quantity, setQuantity] = useState(1)
+    const [qty, setQty] = useState(1)
     const dispatch = useDispatch();
     console.log(productvalue);
     
@@ -16,7 +16,7 @@ export default function ProductDetails(props) {
     const handleaaddtocat = (d) => {
         const Datacat = {
             ...d,
-            quantity: quantity
+            qty: qty
         }
         console.log(Datacat);
         dispatch(addCart(d))
@@ -35,7 +35,7 @@ export default function ProductDetails(props) {
                 <div className='row'>
                     {
                         productvalue.map((d) => {
-                            console.log("ddd", d);
+                            // console.log("ddd", d);
                             return (
                                 <>
 
@@ -49,6 +49,7 @@ export default function ProductDetails(props) {
                                                 <span className="fw-bold">Price : {d.price}</span><br />
                                                 <div className='d-flex pt-0 pb-0'>
                                                     <button onClick={() => handleaaddtocat(d)} className='cartbtn'>Add to Cart</button>
+
                                                     <button onClick={() => handleCart(d)} className='cartbtn'>Buy Now &#8961;</button>
                                                 </div>
                                             </div>
