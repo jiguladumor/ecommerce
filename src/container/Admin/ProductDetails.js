@@ -25,6 +25,7 @@ export default function ProductDetails(props) {
     const handleCart = () => {
         
     }
+    
 
     return (
         <>

@@ -2,31 +2,31 @@ import * as ActionTypes from "../ActionType"
 
 const initalState = {
     isLoading: false,
-    cart:[],
-    error:''
+    cart: [],
+    error: ''
 }
 
 export const AddtocartReducer = (state = initalState, action) => {
-    console.log(action.payload , state.cart);
+    console.log(action.payload, state.cart);
     switch (action.type) {
         case ActionTypes.ADD_CART:
             return {
                 ...state,
                 isLoading: false,
                 cart: state.cart.concat(action.payload),
-                error:''
+                error: ''
             }
         case ActionTypes.INCREMENT_COUNTER:
             return {
                 ...state,
                 isLoading: false,
-                cart:state.cart.map((c) => {
+                cart: state.cart.map((c) => {
                     console.log(c);
                     if (c.id === action.payload) {
-                        return(
+                        return (
                             {
-                                id:c.id,
-                                quantity: c.quantity + 1
+                                id: c.id,
+                                qty: c.qty + 1
                             }
                         )
                     } else {
@@ -43,16 +43,23 @@ export const AddtocartReducer = (state = initalState, action) => {
                     if (c.id === action.payload) {
                         return (
                             {
-                                id : c.id,
-                                quantity: c.quantity - 1
+                                id: c.id,
+                                qty: c.qty - 1
                             }
                         )
-                    }else {
+                    } else {
                         return c
                     }
                 })
             }
 
+            case ActionTypes.DELETE_CART:
+                return {
+                    ...state,
+                    isLoading: false,
+                    cart: state.cart.filter((d) => d.id !== action.payload),
+                    error: ''
+                }
         default:
             return state;
     }

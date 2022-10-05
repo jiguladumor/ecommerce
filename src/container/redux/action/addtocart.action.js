@@ -1,16 +1,21 @@
 import * as ActionTypes from "../ActionType"
 
 export const 
-addCart = (d) => (dispech) => {
-    // dispech({type:ActionTypes.ADD_CART, payload:d})
+addCart = (d) => (dispatch) => {
+    // dispatch({type:ActionTypes.ADD_CART, payload:d})
     
-    dispech({type:ActionTypes.ADD_CART, payload:{id:d.id,qty:1}})
+    dispatch({type:ActionTypes.ADD_CART, payload:{id:d.id,qty:1}})
 }
 
-export const incrementCounter = () => (dispech) => {
-    dispech({type:ActionTypes.INCREMENT_COUNTER});
+export const incrementCounter = (id) => (dispatch) => {
+    dispatch({type:ActionTypes.INCREMENT_COUNTER, payload : id});
 }
 
-export const decrementCounter = () => (dispech) => {
-    dispech({type:ActionTypes.DECREMENT_COUNTER});
+export const decrementCounter = (id) => (dispatch) => {
+    dispatch({type:ActionTypes.DECREMENT_COUNTER, payload : id});
 }
+
+export const handledelete = (id) => (dispatch) => {
+    dispatch({type:ActionTypes.DELETE_CART, payload : id});
+}
+
