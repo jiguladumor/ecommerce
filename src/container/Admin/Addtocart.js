@@ -23,6 +23,7 @@ export default function Addtocart(props) {
     };
 
     const filterdata = [];
+    let Total;
 
     c.cart.map((c) => {
         products.product.map((p) => {
@@ -36,6 +37,16 @@ export default function Addtocart(props) {
             }
         });
     });
+
+    let TotalAmount = 0;
+    filterdata.map((c) => {
+        Total = c.price * c.qty;
+        TotalAmount = TotalAmount + Total;
+    })
+
+    const Discount = Math.round(TotalAmount * 0.05);
+    const FinalAmount = TotalAmount - Discount;
+
 
     const handleclickdelete = (id) => {
         dispatch(handledelete(id))
@@ -92,7 +103,19 @@ export default function Addtocart(props) {
                         }
                     </tbody>
                 </table>
+                <div className="col-lg-3">
+                <h2>Price Details</h2>
+                <div>
+                    <p>({filterdata.length} item) <samp>{TotalAmount}</samp></p>
+                    <p>Discount<samp> - {Discount}</samp></p>
+                </div>
+                <div>
+                    <p>Total Amount <b><samp>{FinalAmount}</samp></b></p>
+                </div>
+                <p>You willn save {Discount} on this order</p>
             </div>
+            </div>
+            
         </>
     );
 }
