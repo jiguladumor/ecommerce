@@ -13,6 +13,7 @@ import { Provider } from 'react-redux';
 import { store } from './container/redux/Store';
 import ProductDetails from './container/Admin/ProductDetails';
 import Addtocart from './container/Admin/Addtocart';
+import Placeorder from './container/Admin/Placeorder';
 
 
 
@@ -31,6 +32,7 @@ function App() {
         <Route exact path={"/Category_admin"} component={Category_admin} />
         <Route exact path={"/Product_admin"} component={Product_admin} />
         <Route exact path={"/ProductDetails"} component={ProductDetails} />
+        <Route exact path={"/Placeorder"} component={Placeorder} />
         <Route exact path={"/Addtocart"} component={Addtocart} />
        </Switch>
      </Provider>

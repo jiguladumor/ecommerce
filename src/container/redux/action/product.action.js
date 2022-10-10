@@ -108,7 +108,7 @@ export const editproduct = (data) => async (dispatch) => {
                 await updateDoc(productsRef,{
                   name: data.name,
                   price: data.price,
-                  category: data.category,
+                  categoryname: data.categoryname,
                   url: url,
                   FileName: image
                 });

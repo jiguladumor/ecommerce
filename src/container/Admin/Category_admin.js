@@ -26,8 +26,8 @@ export default function Category() {
   const [dopen, setDopen] = React.useState(false);
   const [did, setDid] = useState()
   const dispatch = useDispatch();
-  const categorys = useSelector(state => state.category)
-  console.log(categorys);
+  const categorydata = useSelector(state => state.category)
+  console.log(categorydata);
 
   const handleClickDopen = (id) => {
     setDopen(true);
@@ -175,7 +175,7 @@ export default function Category() {
     // let localData = JSON.parse(localStorage.getItem("category"))
 
     // if (localData !== null) {
-    setData(categorys.category)
+    setData(categorydata.category)
     // }
   }
 
@@ -187,7 +187,7 @@ export default function Category() {
     },
     [])
 
-  console.log(categorys.category);
+  console.log(categorydata.category);
   // console.log(formik.errors);
 
   return (
@@ -200,7 +200,7 @@ export default function Category() {
             </Button>
             <div style={{ height: 400, width: '100%' }}>
               <DataGrid
-                rows={categorys.category}
+                rows={categorydata.category}
                 columns={columns}
                 pageSize={5}
                 rowsPerPageOptions={[5]}

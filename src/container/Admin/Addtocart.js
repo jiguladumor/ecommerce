@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import {
     decrementCounter,
     handledelete,
@@ -115,7 +116,11 @@ export default function Addtocart(props) {
                 <p>You willn save {Discount} on this order</p>
             </div>
             </div>
-            
+            <div>
+                        <NavLink to={{pathname: '/Placeorder', state: { cart: filterdata }}}>
+                            Place Order
+                        </NavLink>
+                    </div>
         </>
     );
 }

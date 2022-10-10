@@ -33,6 +33,8 @@ export default function Product() {
   const products = useSelector((state) => state.product);
   const categorydata = useSelector((state) => state.category);
 
+  console.log(categorydata);
+
   // console.log(products);
 
   const handleClickDopen = (id) => {
