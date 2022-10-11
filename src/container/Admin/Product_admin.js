@@ -16,6 +16,7 @@ import { DialogContentText, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CreateIcon from "@mui/icons-material/Create";
 import { useDispatch, useSelector } from "react-redux";
+import {Categorydata} from "../redux/action/category.action"
 import {
   addProduct,
   deleteproduct,
@@ -34,6 +35,10 @@ export default function Product() {
   const categorydata = useSelector((state) => state.category);
 
   console.log(categorydata);
+
+  useEffect(() => {
+    dispatch(Categorydata());
+  }, [])
 
   // console.log(products);
 
@@ -76,6 +81,7 @@ export default function Product() {
         handleupdate(value);
       } else {
         handleSubmitdata(value);
+        console.log(value);
       }
       resetForm();
     },

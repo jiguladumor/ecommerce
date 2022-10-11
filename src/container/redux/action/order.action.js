@@ -3,7 +3,7 @@ import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from "firebase
 import * as ActionTypes from "../ActionType"
 
 
-export const getorder = (data) => async (dispatch) => {
+export const getorder = () => async (dispatch) => {
 
     try {
         let data = []
@@ -22,14 +22,14 @@ export const getorder = (data) => async (dispatch) => {
 }
 
 export const addorder = (OrderData) => async (dispatch) => {
-    console.log(OrderData);
+    // console.log(OrderData);
     try {
         const ordersRef = await addDoc(collection(db, "order"), OrderData)
         dispatch({ type: ActionTypes.ADD_ORDER, payload: ordersRef })
 
     } catch (error) {
         dispatch(errororder(error.message))
-        console.error("Error adding document: ", error);
+        // console.error("Error adding document: ", error);
     }
 }
 

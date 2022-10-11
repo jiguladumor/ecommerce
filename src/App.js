@@ -14,6 +14,7 @@ import { store } from './container/redux/Store';
 import ProductDetails from './container/Admin/ProductDetails';
 import Addtocart from './container/Admin/Addtocart';
 import Placeorder from './container/Admin/Placeorder';
+import Order_admin from './container/Admin/Order_admin';
 
 
 
@@ -33,6 +34,7 @@ function App() {
         <Route exact path={"/Product_admin"} component={Product_admin} />
         <Route exact path={"/ProductDetails"} component={ProductDetails} />
         <Route exact path={"/Placeorder"} component={Placeorder} />
+        <Route exact path={"/Order_admin"} component={Order_admin} />
         <Route exact path={"/Addtocart"} component={Addtocart} />
        </Switch>
      </Provider>

@@ -3,31 +3,34 @@ import { db, storage } from "../../../Firebase";
 import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from "firebase/firestore";
 import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
-export const Categorydata = (data) => async (dispatch) => {
-  // console.log(data);
+export const Categorydata = () => async (dispatch) => {
+  // console.log("sdasassdasdsad");
   try {
     let data = []
     const querySnapshot = await getDocs(collection(db, "categorys"));
 
     querySnapshot.forEach((doc) => {
       data.push({ id: doc.id, ...doc.data() })
-      dispatch({ type: ActionTypes.GET_CATEGORY, payload: data })
       // console.log(`${doc.id} => ${doc.data()}`);
     });
 
+    // console.log(data);
+
+    dispatch({ type: ActionTypes.GET_CATEGORY, payload: data })
+
   } catch (error) {
     dispatch(errorCategory(error.message))
-    console.log(error.message);
+    // console.log(error.message);
   }
 }
 
 export const addCategory = (data) => (dispatch) => {
-  console.log(data);
+  // console.log(data);
   try {
 
     //  const docRef = await addDoc(collection(db, " doctors"),{id:docRef.id, ...data});
     const rendomName = Math.floor(Math.random() * 10000000).toString();
-    console.log(rendomName);
+    // console.log(rendomName);
     const categorysRef = ref(storage, 'categorys/' + rendomName);
 
     uploadBytes(categorysRef, data.file)
@@ -59,7 +62,7 @@ export const addCategory = (data) => (dispatch) => {
 
 
 export const deletecategory = (data) => async (dispatch) => {
-  console.log(data);
+  // console.log(data);
   try {
     const categorysRef = ref(storage, 'categorys/' + data.FileName);
     // console.log(categorysRef);
@@ -76,19 +79,19 @@ export const deletecategory = (data) => async (dispatch) => {
 }
 
 export const editcategory = (data) => async (dispatch) => {
-  console.log(data);
+  // console.log(data);
   
   try {
     const categorysRef = doc(db, "categorys", data.id);
     if (typeof data.file === "string") { 
-      console.log("only data");
+      // console.log("only data");
       await updateDoc(categorysRef, {
         categoryname: data.categoryname,
         url: data.url
       });
       dispatch({ type: ActionTypes.EDIT_CATEGORY, payload: data })
     } else {
-      console.log("error");
+      // console.log("error");
       const Categortdel = ref(storage, 'categorys/' + data.FileName);
 
       deleteObject(Categortdel).then(async () => {
