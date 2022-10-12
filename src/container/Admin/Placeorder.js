@@ -16,12 +16,8 @@ export default function Placeorder(props) {
     const [open, setOpen] = React.useState(false);
     // const [data, setData] = useState([])
     const dispatch = useDispatch()
-
     const history = useHistory()
-    // const products = useSelector(state => state.product)
-    // console.log(products);
-    // const categorys = useSelector(state => state.category)
-    // console.log(categorys.category);
+
     const cart = useSelector(state => state.cart)
     console.log(cart);
 
@@ -53,7 +49,7 @@ export default function Placeorder(props) {
                 cart: props.location.state.cart
             }
             console.log("OrderData", OrderData)
-            history.push('/Orderadmin', OrderData)
+            history.push('/Home', OrderData)
             handleSubmitdata(OrderData)
             // resetForm();
         }
@@ -68,7 +64,6 @@ export default function Placeorder(props) {
 
     useEffect(
         () => {
-
             dispatch(getorder())
         },
         [])
@@ -82,7 +77,7 @@ export default function Placeorder(props) {
             if (c.id === p.id) {
                 const data = {
                     ...p,
-                    Quantity: c.Quantity
+                    qty: c.qty
                 }
                 filterdata.push(data);
             }
@@ -93,15 +88,12 @@ export default function Placeorder(props) {
     let Total = 0;
 
     filterdata.map((c) => {
-        //console.log("11111111", parseInt(c.price), c.price, c.Quantity);
-        Total = c.Quantity * c.price;
+        Total = c.qty * c.price;
         TotalAmount = TotalAmount + Total;
     })
 
     const Discount = Math.round(TotalAmount * 0.08);
-    // const DeliveryCharges = Math.round(TotalAmount + 0.05);
     const FinalAmount = TotalAmount - Discount;
-
 
     return (
         <>

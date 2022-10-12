@@ -7,7 +7,7 @@ const initalState = {
 }
 
 export const categoryReducer = (state = initalState, action) => {
-    console.log(action.type, action.payload, state);
+    // console.log(action.type, action.payload, state);
 
     switch (action.type) {
 
