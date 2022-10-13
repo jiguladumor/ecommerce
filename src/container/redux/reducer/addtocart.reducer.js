@@ -10,18 +10,27 @@ export const AddtocartReducer = (state = initalState, action) => {
     // console.log(action.payload, state.cart);
     switch (action.type) {
         case ActionTypes.ADD_CART:
-            return {
-                ...state,
-                isLoading: false,
-                cart: state.cart.concat(action.payload),
-                error: ''
-            }
+            
+                const Data = state.cart.find((c) => c.id === action.payload.id)
+                if (Data) {
+                    Data.qty++;
+                } else {
+                    state.cart.push(action.payload);
+                }
+                return {
+                    ...state,
+                    isLoading: false,
+                    // cart: state.cart.concat(action.payload),
+                    error: ''
+                }
+               
+           
         case ActionTypes.INCREMENT_COUNTER:
             return {
                 ...state,
                 isLoading: false,
                 cart: state.cart.map((c) => {
-                    console.log(c);
+                    // console.log(c);
                     if (c.id === action.payload) {
                         return (
                             {

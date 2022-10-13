@@ -68,7 +68,12 @@ function Header(props) {
                                 <a href="#"><i className="fa fa-search text-dark px-2" aria-hidden="true"></i></a>
                                 <a href="#"><i className="fa fa-user text-dark px-2" aria-hidden="true"></i></a>
                                 <a href="#"><i className="fa fa-heart text-dark px-2" aria-hidden="true"></i></a>
-                                <a href="#"><i className="fa fa-shopping-bag text-dark px-2" aria-hidden="true"></i></a>
+                                {/* <a href="#">
+                                    <i className="fa fa-shopping-bag text-dark px-2" aria-hidden="true"></i>
+                                    </a> */}
+                                              <NavLink exact to={"/Addtocart"} ClassName="nav-link scrollto active"><i
+                                        className="fa fa-shopping-bag text-dark px-2" aria-hidden="true"></i></NavLink>
+
                             </div>
                         </div>
                     </div>

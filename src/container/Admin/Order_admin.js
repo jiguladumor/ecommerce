@@ -58,7 +58,7 @@ export default function Order_admin(props) {
                                                                 <tr>
                                                                 <td>{d.name}</td>
                                                                 <td>{d.price}</td>
-                                                                <td>{d.categoryname}</td>
+                                                                <td >{d.categoryname}</td>
                                                                 <td><img src={d.url} width={50} /></td>
                                                             </tr>
                                                             </>

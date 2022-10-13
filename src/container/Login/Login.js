@@ -100,10 +100,7 @@ export default function Login() {
                   </div>
                 ) : null}
                 {
-                  // password === true ? <div className="col-md-12 form-group mt-3 mt-md-0">
-                  //     <input type="name" className="form-control" name="name" id="name" placeholder="Your Name" data-rule="name" data-msg="Please enter a valid email" />
-                  //     <div className="validate" />
-                  // </div> :
+
                   usertype === "Login" ? null : (
                     <div className="col-md-12 form-group mt-3 mt-md-0">
                       <input
@@ -114,6 +111,7 @@ export default function Login() {
                         placeholder="Your name"
                         onChange={formik.handleChange}
                         value={formik.values.name}
+                        onBlur={formik.handleBlur}
                       />
                       <p>{formik.errors.name}</p>
                       <div className="validate" />
@@ -130,6 +128,7 @@ export default function Login() {
                     data-rule="email"
                     onChange={formik.handleChange}
                     value={formik.values.email}
+                    onBlur={formik.handleBlur}
                     data-msg="Please enter a valid email"
                   />
                   <p>{formik.errors.email}</p>
@@ -144,6 +143,7 @@ export default function Login() {
                     placeholder="password"
                     onChange={formik.handleChange}
                     value={formik.values.password}
+                    onBlur={formik.handleBlur} 
                   />
                   <p>{formik.errors.password}</p>
                   <div className="validate" />

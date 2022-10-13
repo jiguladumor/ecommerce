@@ -169,7 +169,7 @@ function Home(props) {
                         <div className="row">
                             {
                                 categorydata.map((v, i) => {
-                                    // console.log(v);
+                                    console.log(v);
                                     return (
                                         <>
 
