@@ -65,7 +65,7 @@ function Header(props) {
                                 </li>
                             </ul>
                             <div className="social-icon d-flex">
-                                <a href="#"><i className="fa fa-search text-dark px-2" aria-hidden="true"></i></a>
+                                
                                 <a href="#"><i className="fa fa-user text-dark px-2" aria-hidden="true"></i></a>
                                 <a href="#"><i className="fa fa-heart text-dark px-2" aria-hidden="true"></i></a>
                                 {/* <a href="#">

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
+import { NavLink } from 'react-router-dom';
 import { Navbar } from 'reactstrap';
 import { Categorydata } from '../redux/action/category.action';
 import { Productdata } from '../redux/action/product.action';
@@ -84,7 +85,7 @@ function Home(props) {
                                                 <p className="mt-3 mb-3">Competently expedite alternative benefits whereas
                                                     leading-edge catalysts for
                                                     change. Globally leverage existing an expanded array of leadership.</p>
-                                                <button className="btns text-white">Shop now <i className="fa fa-angle-double-right" aria-hidden="true" /></button>
+                                                <NavLink exact to={"/Shope"} className="btns text-white">Shop now <i className="fa fa-angle-double-right" aria-hidden="true" /></NavLink>
                                             </div>
                                             <div className="overlay" />
                                         </div>
@@ -180,9 +181,9 @@ function Home(props) {
                                                         <div className="collection-text ">
                                                             <h3 className="text-uppercase fs-4 me-5">{v.categoryname}</h3>
                                                         </div>
-                                                        <div className="collections-btn position-absolute">
+                                                        {/* <div className="collections-btn position-absolute">
                                                             <button className="btn">Explore All</button>
-                                                        </div>
+                                                        </div> */}
                                                     </div>
                                                 </div>
                                             </div>
@@ -355,7 +356,8 @@ function Home(props) {
                                 <p className="text-white">Credibly conceptualize virtual infrastructures without fully tested
                                     interface. Appropriately engineer backend internal or "organic" sources via goal-orien
                                     technology. Authoritatively provide.</p>
-                                <button className="btns text-white">Shop now</button>
+                                {/* <button className="btns text-white">Shop now</button> */}
+                                <NavLink exact to={"/Shope"} className="btns text-white">Shop now</NavLink>
                             </div>
                             <div className="col-lg-6 video-btn mega-hover">
                                 <a href="javascript.void();"><img src="image/shoe-video.jpg" alt className="img-fluid" /></a>

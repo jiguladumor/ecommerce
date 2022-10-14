@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import * as yup from "yup";
-import { useFormik } from "formik";
+import { Form, Formik, useFormik } from "formik";
 
 export default function Login() {
   const [usertype, setuserType] = useState("Login");
   const [password, setpassword] = useState(false);
+  const [reset, setReset] = useState([])
 
   const handleLogin = () => {
 
@@ -18,49 +19,74 @@ export default function Login() {
 
   };
 
+  const handlepassword = () => {
+   
+}
 
-  let Login = {
-    email: yup
-      .string()
-      .required("please enter email")
-      .email("please enter your email"),
-    password: yup.string().required("please enter your password"),
-  };
 
-  let Signup = {
-    name: yup.string().required("please enter your name"),
-    email: yup
-      .string()
-      .required("please enter email")
-      .email("please enter your email"),
-    password: yup.string().required("please enter your password"),
-  };
 
-  let loginschema, initval;
+let Login = {
+  email: yup.string().required('enter email').email('enter valid email'),
+  password: yup.string().required('please enter password'),
+}
 
-  if (usertype === "Login") {
-    loginschema = yup.object().shape(Login);
+let Signup = {
+  name: yup.string().required('please enter name'),
+  email: yup.string().required('enter email').email('enter valid email'),
+  password: yup.string().required('please enter password'),
+}
+
+let Password = {
+  email: yup.string().required('enter email').email('enter valid email')
+}
+
+  let schema, initval;
+
+
+  if (usertype === "Login" && !reset) {
+    schema = yup.object().shape(Login);
     initval = {
-      email: "",
-      password: "",
-    };
-  } else if (usertype === "Signup") {
-    loginschema = yup.object().shape(Signup);
+        email: '',
+        password: ''
+    }
+} else if (usertype === "Signup" && !reset) {
+  schema = yup.object().shape(Signup);
+  initval = {
+        name: '',
+        email: '',
+        password: ''
+    }
+} else if (reset) {
+    console.log(reset);
+    schema = yup.object().shape(Password);
     initval = {
-      name: "",
-      email: "",
-      password: "",
-    };
-  }
+        email: ''
+    }
+}
 
-  const formik = useFormik({
-    initialValues: { initval },
-    validationSchema: loginschema,
-    onSubmit: (values, { resetForm }) => {
-      alert(JSON.stringify(values, null, 2));
-      resetForm();
-    },
-  });
+const formik = useFormik({
+  initialValues: initval,
+  validationSchema: schema,
+  onSubmit: values => {
+      // alert(JSON.stringify(values, null, 2));
+      if (usertype === "Login" && !reset) {
+          handleLogin(values)
+      } else if (usertype === "Signup" && !reset) {
+          handleSignup(values)
+      } else if (reset) {
+          handlepassword(values)
+      }
+
+  },
+});
+  // const formik = useFormik({
+  //   initialValues: { initval },
+  //   validationSchema: loginschema,
+  //   onSubmit: (values, { resetForm }) => {
+  //     alert(JSON.stringify(values, null, 2));
+  //     resetForm();
+  //   },
+  // });
 
   // console.log(formik.errors);
 
@@ -81,8 +107,8 @@ export default function Login() {
           </div>
         )}
         <div action method="post" className="php-email-form">
-          <formik value={formik}>
-            <form onSubmit={formik.handleSubmit}>
+          <Formik value={formik}>
+            <Form onSubmit={formik.handleSubmit}>
               <div className="row">
                 {password === true ? (
                   <div className="col-md-12 form-group mt-3 mt-md-0">
@@ -95,10 +121,14 @@ export default function Login() {
                       onChange={formik.handleChange}
                       value={formik.values.email}
                     />
+                    {
+                      formik.errors.email && formik.touched.email ? <p>{formik.errors.email}</p> : ''
+                    }
                     <p>{formik.errors.email}</p>
                     <div className="validate" />
                   </div>
                 ) : null}
+                
                 {
 
                   usertype === "Login" ? null : (
@@ -143,7 +173,7 @@ export default function Login() {
                     placeholder="password"
                     onChange={formik.handleChange}
                     value={formik.values.password}
-                    onBlur={formik.handleBlur} 
+                    onBlur={formik.handleBlur}
                   />
                   <p>{formik.errors.password}</p>
                   <div className="validate" />
@@ -206,8 +236,8 @@ export default function Login() {
                   </button>
                 </div>
               )}
-            </form>
-          </formik>
+            </Form>
+          </Formik>
         </div>
       </div>
     </section>
