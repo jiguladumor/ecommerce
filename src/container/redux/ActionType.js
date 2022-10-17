@@ -22,3 +22,20 @@ export const DELETE_CART = "DELETE_CART"
 export const ADD_ORDER = "ADD_ORDER"
 export const GET_ORDER = "GET_ORDER"
 export const ERROR_ORDER = "ERROR_ORDER"
+
+//login
+export const LOGIN_USER = "LOGIN_USER"
+export const LOGGED_USER = "LOGGED_USER"
+
+export const SIGNUP_USER = "SIGNUP_USER"
+export const EMAIL_VERIFY = "EMAIL_VERIFY"
+
+// LogoutUser
+export const LOGOUT_USER = "LOGOUT_USER"
+export const LOGGEDINOUT_USER = "LOGGEDINOUT_USER"
+
+// googlelogin
+export const GOOGLELOGIN_USER = "GOOGLELOGIN_USER"
+export const FACEBOOK_LOGIN = "FACEBOOK_LOGIN"
+
+export const FORGET_PASSWORD_USER = "FORGET_PASSWORD_USER"

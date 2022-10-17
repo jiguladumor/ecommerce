@@ -1,84 +1,76 @@
 import React, { useState } from "react";
 import * as yup from "yup";
 import { Form, Formik, useFormik } from "formik";
+import { forgetActionpassword, LoginAction, signupAction } from "../redux/action/auth.Action";
+import { useDispatch } from "react-redux";
 
 export default function Login() {
   const [usertype, setuserType] = useState("Login");
-  const [password, setpassword] = useState(false);
   const [reset, setReset] = useState([])
+  const [password, setpassword] = useState(false);
+  const dispatch = useDispatch()
 
-  const handleLogin = () => {
-
+  const handleLogin = (values) => {
+    console.log(values);
+    dispatch(LoginAction(values))
   };
 
-  const handleSignup = () => {
-
+  const handleSignup = (values) => {
+    dispatch(signupAction(values))
   };
 
-  const passwordchng = () => {
 
+
+  let Login = {
+    email: yup
+      .string()
+      .required("please enter email")
+      .email("please enter your email"),
+    password: yup.string().required("please enter your password"),
   };
 
-  const handlepassword = () => {
-   
-}
+  let Signup = {
+    name: yup.string().required("please enter your name"),
+    email: yup
+      .string()
+      .required("please enter email")
+      .email("please enter your email"),
+    password: yup.string().required("please enter your password"),
+  };
+
+  let Password = {
+    email: yup.string().required('enter email').email('enter valid email')
+  }
 
 
+  const handlepassword = (values) => {
+    // alert(JSON.stringify(values.email));
+    dispatch(forgetActionpassword(values))
+  }
 
-let Login = {
-  email: yup.string().required('enter email').email('enter valid email'),
-  password: yup.string().required('please enter password'),
-}
+  let loginschema, initval;
 
-let Signup = {
-  name: yup.string().required('please enter name'),
-  email: yup.string().required('enter email').email('enter valid email'),
-  password: yup.string().required('please enter password'),
-}
-
-let Password = {
-  email: yup.string().required('enter email').email('enter valid email')
-}
-
-  let schema, initval;
-
-
-  if (usertype === "Login" && !reset) {
-    schema = yup.object().shape(Login);
+  if (usertype === "Login") {
+    loginschema = yup.object().shape(Login);
     initval = {
-        email: '',
-        password: ''
-    }
-} else if (usertype === "Signup" && !reset) {
-  schema = yup.object().shape(Signup);
-  initval = {
-        name: '',
-        email: '',
-        password: ''
-    }
-} else if (reset) {
+      email: "",
+      password: "",
+    };
+  } else if (usertype === "Signup") {
+    loginschema = yup.object().shape(Signup);
+    initval = {
+      name: "",
+      email: "",
+      password: "",
+    };
+  } else if (reset) {
     console.log(reset);
-    schema = yup.object().shape(Password);
+    loginschema = yup.object().shape(Password);
     initval = {
-        email: ''
+      email: ''
     }
-}
+  }
 
-const formik = useFormik({
-  initialValues: initval,
-  validationSchema: schema,
-  onSubmit: values => {
-      // alert(JSON.stringify(values, null, 2));
-      if (usertype === "Login" && !reset) {
-          handleLogin(values)
-      } else if (usertype === "Signup" && !reset) {
-          handleSignup(values)
-      } else if (reset) {
-          handlepassword(values)
-      }
-
-  },
-});
   // const formik = useFormik({
   //   initialValues: { initval },
   //   validationSchema: loginschema,
@@ -87,31 +79,40 @@ const formik = useFormik({
   //     resetForm();
   //   },
   // });
+  const formik = useFormik({
+    initialValues: initval,
+    validationSchema: loginschema,
+    onSubmit: values => {
+      // alert(JSON.stringify(values, null, 2));
+      if (usertype === "Login" && !password) {
+        handleLogin(values)
+      } else if (usertype === "Signup" && !password ) {
+        handleSignup(values)
+      } else if (password) {
+        handlepassword(values)
+      }
+
+    },
+  });
 
   // console.log(formik.errors);
 
   return (
     <section id="appointment" className="appointment">
       <div className="container">
-        {password ? (
-          <div className="section-title">
-            <h2 className="centeerr">Forget password</h2>
-          </div>
-        ) : usertype === "Login" ? (
-          <div classname="section-title">
-            <h2 className="centeerr">Login</h2>
-          </div>
-        ) : (
-          <div classname="section-title">
-            <h2 className="centeerr">Signup</h2>
-          </div>
-        )}
-        <div action method="post" className="php-email-form">
+        <div className='section-title'>
+          {
+            password ?
+              <h2 className='center'>Forget password</h2> :
+              usertype === 'Login' ? <h2 className='center'>Login</h2> : <h2 className='center'>Signup</h2>
+          }
+        </div>
+        <div action method="post" className="php-email-form ">
           <Formik value={formik}>
             <Form onSubmit={formik.handleSubmit}>
               <div className="row">
                 {password === true ? (
-                  <div className="col-md-12 form-group mt-3 mt-md-0">
+                  <div className="col-md-12  form-group mt-3 mt-md-0">
                     <input
                       type="email"
                       className="form-control"
@@ -121,14 +122,10 @@ const formik = useFormik({
                       onChange={formik.handleChange}
                       value={formik.values.email}
                     />
-                    {
-                      formik.errors.email && formik.touched.email ? <p>{formik.errors.email}</p> : ''
-                    }
                     <p>{formik.errors.email}</p>
                     <div className="validate" />
                   </div>
                 ) : null}
-                
                 {
 
                   usertype === "Login" ? null : (
@@ -141,14 +138,14 @@ const formik = useFormik({
                         placeholder="Your name"
                         onChange={formik.handleChange}
                         value={formik.values.name}
-                        onBlur={formik.handleBlur}
                       />
                       <p>{formik.errors.name}</p>
                       <div className="validate" />
                     </div>
                   )
                 }
-                <div className="col-md-12 form-group mt-3 mt-md-0">
+
+                <div className="col-md-12 form-group mt-3 mt-md-0 ">
                   <input
                     type="email"
                     className="form-control"
@@ -158,12 +155,15 @@ const formik = useFormik({
                     data-rule="email"
                     onChange={formik.handleChange}
                     value={formik.values.email}
-                    onBlur={formik.handleBlur}
                     data-msg="Please enter a valid email"
                   />
+
+
                   <p>{formik.errors.email}</p>
                   <div className="validate" />
                 </div>
+                <br></br>
+
                 <div className="col-md-12 form-group mt-3 mt-md-0">
                   <input
                     type="password"
@@ -173,13 +173,13 @@ const formik = useFormik({
                     placeholder="password"
                     onChange={formik.handleChange}
                     value={formik.values.password}
-                    onBlur={formik.handleBlur}
                   />
                   <p>{formik.errors.password}</p>
                   <div className="validate" />
                 </div>
               </div>
-              {password ? (
+
+              {/* {password ? (
                 <div className="text-center">
                   <button type="submit" onClick={() => passwordchng()}>
                     Forget password
@@ -188,7 +188,7 @@ const formik = useFormik({
                 </div>
               ) : usertype === "Login" ? (
                 <div className="text-center">
-                  <button type="submit" onClick={() => handleLogin()}>
+                  <button className="" type="submit" onClick={() => handleLogin()}>
                     Login
                   </button>
                   <br></br>
@@ -199,7 +199,21 @@ const formik = useFormik({
                     signup
                   </button>
                 </div>
-              )}
+              )} */}
+              {
+                password ?
+                  <div className="text-center">
+                    <button type="submit">Forgot password</button>
+                  </div>
+                  :
+                  usertype === 'Login' ?
+                    <div className="text-center">
+                      <button type="submit">Login</button><br></br>
+                    </div> :
+                    <div className="text-center">
+                      <button type="submit">signup</button>
+                    </div>
+              }
               {password === true ? (
                 <div className="text-center mt-5">
                   <span>already have an account ?</span>
@@ -207,13 +221,13 @@ const formik = useFormik({
                 </div>
               ) : usertype === "Login" ? (
                 <div className="text-center mt-5">
-                  <span>create a New account</span>
-                  <button
+                  <span>create a New account ? </span>
+                  <button className="border-0 bg-transparent text-warning"
                     onClick={() => {
                       setuserType("Signup");
                     }}
                   >
-                    signup
+                    <a>signup</a>
                   </button>{" "}
                   <br></br>
                   <button
@@ -227,7 +241,7 @@ const formik = useFormik({
               ) : (
                 <div className="text-center mt-5">
                   <span>already have an account ?</span>
-                  <button
+                  <button className="border-0 bg-transparent text-warning"
                     onClick={() => {
                       setuserType("Login");
                     }}
@@ -243,3 +257,14 @@ const formik = useFormik({
     </section>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
