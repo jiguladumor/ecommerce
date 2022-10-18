@@ -1,24 +1,16 @@
 import * as ActionTypes from "../ActionType"
 
-export const signupAction = (data) => (dispatch) => {
-    dispatch({ type: ActionTypes.SIGNUP_USER, payload: data })
-    console.log(data);
+export const signinuser = (values) => (dispech) => {
+    dispech({type:ActionTypes.SIGNIN_USER, payload: values});
 }
 
-export const LoginAction = (data) => (dispatch) => {
-    dispatch({ type: ActionTypes.LOGIN_USER, payload: data })
-    console.log(data);
+export const signupuser = (values) => (dispech) => {
+    dispech({type:ActionTypes.SIGNUP_USER, payload: values});
 }
 
-// googlelogin
-export const googleActionLogin = () => (dispatch) => {
-    dispatch({ type: ActionTypes.GOOGLELOGIN_USER })
+export const forgotpassword = (values) => (dispech) => {
+    dispech({type:ActionTypes.FORGOT_PASSWORD, payload: values});
 }
-
-export const FacebookLogin = () => (dispatch) => {
-    dispatch({ type: ActionTypes.FACEBOOK_LOGIN })
-}
-
-export const forgetActionpassword = (data) => (dispatch) => {
-    dispatch({ type: ActionTypes.FORGET_PASSWORD_USER, payload: data })
+export const googlelogin = () => (dispech) => {
+    dispech({type:ActionTypes.GOOGLE_LOGIN})
 }

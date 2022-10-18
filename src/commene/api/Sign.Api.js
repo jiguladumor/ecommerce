@@ -1,109 +1,80 @@
-import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
-import { GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
-import { auth, authentication } from "../../Firebase"
+import { Euro } from "@mui/icons-material";
+import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail } from "firebase/auth";
+import { auth } from "../../Firebase";
 
-// SignAPI
-
-export const SignAPI = (data) => {
-    console.log(data);
+export const signupAPI = (data) => {
+    // console.log(data);
     return new Promise((resolve, reject) => {
         createUserWithEmailAndPassword(auth, data.email, data.password)
             .then((userCredential) => {
-                // Signed in 
                 const user = userCredential.user;
-                console.log(user);
+                // console.log(user);
 
                 onAuthStateChanged(auth, (user) => {
                     if (user) {
                         sendEmailVerification(user)
                         const uid = user.uid;
-                        // ...
                     } else {
+
                     }
-                });
-                // ...
+                })
+                //..
             })
-            .then((emailverified) => {
+            .then((addwdqd) => {
                 onAuthStateChanged(auth, (user) => {
                     if (user) {
                         if (user.emailVerified) {
-                            resolve({ payload: "Email Sucessfull" })
-                            // console.log("Email Sucessfull");
+                            resolve({ payload: "Email secessfull" });
                         } else {
-                            resolve({ payload: "Please verify your Email" })
-                            // console.log("Please verify your Email");
+                            resolve({ payload: "Your Email Verify" });
                         }
                     } else {
-                        reject({ payload: "wrong verify" })
+                        reject({ payload: "wrong verify" });
                     }
-                });
+                })
             })
-
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                console.log(errorCode);
 
-                if (errorCode.localeCompare("auth/alerday use-email"))
-                    reject({ payload: "email already Ragistared" });
-                else {
+
+                if (errorCode.localeCompare("auth/email-already-in-use") === 0) {
+                    reject({ payload: "already RagistarEmail" });
+                } else {
                     reject({ payload: errorCode });
                 }
             });
     })
 }
 
-// LoginAPI
-
-export const LoginAPI = (data) => {
+export const signinAPI = (data) => {
     console.log(data);
     return new Promise((resolve, reject) => {
-
         signInWithEmailAndPassword(auth, data.email, data.password)
-
             .then((user) => {
-                console.log(user);
                 if (user.user.emailVerified) {
                     resolve({ payload: user.user });
+                } else {
+                    reject({ payload: "Your Email Sucessfull" })
                 }
-                else {
-                    reject({ payload: "please verfity your email" });
-                }
-                // console.log(user);        
+                // console.log(user)
             })
-
             .catch((error) => {
-                if (error.code.localeCompare("auth/wrong-password") === 0) {
-                    reject({ payload: "wrong email or password" })
+                if (error.code.localeCompare("auth/user-not-found") === 0) {
+                    reject({ payload: "Please Your Email Register" })
+                } else if (error.code.localeCompare("auth/wrong-password") === 0) {
+                    reject({ payload: "Wrong email or password" })
+                } else {
+                    reject({ payload: error })
                 }
-                else if (error.code.localeCompare("auth/user-not-found") === 0) {
-                    reject({ payload: "please ragistred email" })
-                }
-                else {
-                    reject({ payload: error.code });
-                }
-                // console.log(error); 
-            });
-
-    })
-}
-
-export const LogoutAPI = (data) => {
-    console.log(data);
-    return new Promise((resolve, reject) => {
-        signOut(auth)
-            .then((user) => {
-                resolve({ payload: "Logout Sucessfull" });
-            }).catch((error) => {
-                reject({ payload: error.code });
             })
     })
 }
 
-
-export const googleLoginAPI = () => {
-    const provider = new GoogleAuthProvider();
+export const googalelodinAPI = () => {
     return new Promise((resolve, reject) => {
+        const provider = new GoogleAuthProvider();
+
         signInWithPopup(auth, provider)
             .then((result) => {
                 // This gives you a Google Access Token. You can use it to access the Google API.
@@ -111,7 +82,6 @@ export const googleLoginAPI = () => {
                 const token = credential.accessToken;
                 // The signed-in user info.
                 const user = result.user;
-
                 resolve({ payload: user })
 
             }).catch((error) => {
@@ -122,55 +92,41 @@ export const googleLoginAPI = () => {
                 const email = error.customData.email;
                 // The AuthCredential type that was used.
                 const credential = GoogleAuthProvider.credentialFromError(error);
-
                 reject({ payload: errorCode })
             });
+
     })
 }
 
-export const ForgetpasswordAPI = (data) => {
+export const logauAPI = () => {
+    return new Promise((resolve, reject) => {
+        signOut(auth)
+            .then((user) => {
+                resolve({ payload: "Logout successfully" })
+            })
+            .catch((e) => {
+                reject({ payload: "Somthing Went Wrong" })
+            })
+    })
+}
+
+export const forgotsAPI = (data) => {
+
     return new Promise((resolve, reject) => {
         sendPasswordResetEmail(auth, data.email)
-            .then(() => {
-                resolve({ payload: "Please Check Your email" });
-            }).catch((error) => {
-                const errorCode = error.code;
-
-                if (error.code.localeCompare("auth/user-not-found") === 0)
-                    reject({ payload: "user not found" })
-
-
-                reject({ payload: error.code });
-            })
-    })
-}
-
-
-export const FacebookLoginAPI = () => {
-    const provider = new FacebookAuthProvider();
-    return new Promise((resolve, reject) => {
-        signInWithPopup(auth, provider)
-            .then((result) => {
-                // The signed-in user info.
-                const user = result.user;
-
-                // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-                const credential = FacebookAuthProvider.credentialFromResult(result);
-                const accessToken = credential.accessToken;
-                resolve({ payload: user })
-                // ...
+            .then((user) => {
+                resolve({ payload: "Please check your email" })
+                // console.log(user);
             })
             .catch((error) => {
-                // Handle Errors here.
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                // The email of the user's account used.
-                const email = error.customData.email;
-                // The AuthCredential type that was used.
-                const credential = FacebookAuthProvider.credentialFromError(error);
+                console.log(errorCode);
+                // console.log(errorMessage);
+                if (error.code.localeCompare("auth/missing-email") === 0) {
+                    reject({ payload: "Please Your Email Register" })
+                }
                 reject({ payload: errorCode })
-                // ...
-            });
+            })
     })
 }
-

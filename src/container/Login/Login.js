@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as yup from "yup";
 import { Form, Formik, useFormik } from "formik";
-import { forgetActionpassword, LoginAction, signupAction } from "../redux/action/auth.Action";
+import { forgotpassword, googlelogin, signinuser, signupuser } from '../redux/action/auth.Action';
 import { useDispatch } from "react-redux";
 
 export default function Login() {
@@ -12,14 +12,21 @@ export default function Login() {
 
   const handleLogin = (values) => {
     console.log(values);
-    dispatch(LoginAction(values))
+    dispatch(signinuser(values));
   };
 
   const handleSignup = (values) => {
-    dispatch(signupAction(values))
+    console.log(values);
+    dispatch(signupuser(values))
   };
 
+  const handleGoogalesignup = () => {
+    dispatch(googlelogin())
+}
 
+  const handlepassword = (values) => {
+    // alert(JSON.stringify(values.email));
+    dispatch(forgotpassword(values))
 
   let Login = {
     email: yup
@@ -42,11 +49,6 @@ export default function Login() {
     email: yup.string().required('enter email').email('enter valid email')
   }
 
-
-  const handlepassword = (values) => {
-    // alert(JSON.stringify(values.email));
-    dispatch(forgetActionpassword(values))
-  }
 
   let loginschema, initval;
 
@@ -71,18 +73,11 @@ export default function Login() {
     }
   }
 
-  // const formik = useFormik({
-  //   initialValues: { initval },
-  //   validationSchema: loginschema,
-  //   onSubmit: (values, { resetForm }) => {
-  //     alert(JSON.stringify(values, null, 2));
-  //     resetForm();
-  //   },
-  // });
+
   const formik = useFormik({
     initialValues: initval,
     validationSchema: loginschema,
-    onSubmit: values => {
+    onSubmit:(values, { resetForm }) => {
       // alert(JSON.stringify(values, null, 2));
       if (usertype === "Login" && !password) {
         handleLogin(values)
@@ -91,7 +86,7 @@ export default function Login() {
       } else if (password) {
         handlepassword(values)
       }
-
+      resetForm();
     },
   });
 
@@ -217,7 +212,7 @@ export default function Login() {
               {password === true ? (
                 <div className="text-center mt-5">
                   <span>already have an account ?</span>
-                  <button onClick={() => setpassword(false)}>Login</button>
+                  <button onClick={() => setpassword(false)} >Login</button>
                 </div>
               ) : usertype === "Login" ? (
                 <div className="text-center mt-5">
@@ -249,7 +244,11 @@ export default function Login() {
                     Login
                   </button>
                 </div>
+                
               )}
+              <div>
+                <button onClick={() => {handleGoogalesignup() }}>Googale Signup</button>
+              </div>
             </Form>
           </Formik>
         </div>
@@ -257,14 +256,4 @@ export default function Login() {
     </section>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
+}

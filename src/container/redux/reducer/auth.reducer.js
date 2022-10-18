@@ -1,40 +1,28 @@
 import * as ActionTypes from "../ActionType"
 
-const initialState = {
+const initalState = {
     isLoading: false,
     user: null,
     error: ''
 }
 
-
-export const SignupReducer = (state = initialState, action) => {
-    // console.log(action.type, action.payload);
+export const signupReducer = (state = initalState, action) => {
     switch (action.type) {
-        case ActionTypes.EMAIL_VERIFY:
+        case ActionTypes.LOGGIN_USER:
             return {
                 ...state,
                 isLoading: false,
                 user: action.payload,
                 error: ''
             }
-
-        case ActionTypes.LOGGED_USER:
-            return {
-                ...state,
-                isLoading: false,
-                user: action.payload,
-                error: ''
-            }
-
-        case ActionTypes.LOGGEDINOUT_USER:
+        case ActionTypes.LOGGEDOUT_USER:
             return {
                 ...state,
                 isLoading: false,
                 user: null,
                 error: ''
             }
-
         default:
-            return state
+            return state;
     }
 }
