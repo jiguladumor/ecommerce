@@ -1,7 +1,18 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import Alert from '../../container/Alert';
+import { logoutuser } from '../../container/redux/action/auth.Action';
 
 function Header(props) {
+    // let auth = useSelector(state => state.auth)
+    // // console.log(auth);
+
+    // const dispatch = useDispatch();
+
+    // const handlelogaut = () => {
+    //     dispatch(logoutuser())
+    // }
     return (
         <>
             <header className="theam-color">
@@ -58,11 +69,13 @@ function Header(props) {
                                         className="fa fa-angle-down ms-2" aria-hidden="true"></i></NavLink>
                                         
                                 </li>
+                                
                                 <li className="nav-item">
-                                    {/* <a className="nav-link text-dark" href="Contact.html">Contact</a> */}
+                                    <a className="nav-link text-dark" href="Contact.html">Contact</a>
                                     <NavLink exact to={"/Login"} ClassName="nav-link scrollto active">Login<i
                                         className="fa fa-angle-down ms-2" aria-hidden="true"></i></NavLink>
                                 </li>
+
                             </ul>
                             <div className="social-icon d-flex">
                                 
@@ -75,8 +88,18 @@ function Header(props) {
                                         className="fa fa-shopping-bag text-dark px-2" aria-hidden="true"></i></NavLink>
 
                             </div>
+                            {/* {
+                            auth.user === null ?
+                                <NavLink to={"/Auth"} ClassName="nav-link scrollto active">
+                                    <span className="d-none d-md-inline">Login/ Signup</span>
+                                </NavLink>
+                                : <NavLink onClick={() => handlelogaut()} to={"/Login"} className="appointment-btn scrollto">
+                                    <span className="d-none d-md-inline">Login</span>
+                                </NavLink>
+                           } */}
                         </div>
                     </div>
+                <Alert/>
                 </nav>
             </header>
         </>

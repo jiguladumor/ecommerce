@@ -14,3 +14,19 @@ export const forgotpassword = (values) => (dispech) => {
 export const googlelogin = () => (dispech) => {
     dispech({type:ActionTypes.GOOGLE_LOGIN})
 }
+
+export const logoutuser = () => (dispech) => {
+    dispech({type:ActionTypes.LOGOUT_USER})
+}
+
+export const logginuser = (values) => (dispech) => {
+    dispech({type:ActionTypes.LOGGIN_USER, payload: values});
+}
+
+export const loggedoutuser = () => (dispech) => {
+    dispech({type:ActionTypes.LOGGEDOUT_USER})
+}
+
+export const emailverification = (user) => (dispech) => {
+    dispech({type:ActionTypes.EMAIL_VERIFICATION, payload:user})
+}

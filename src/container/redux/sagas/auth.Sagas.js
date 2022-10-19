@@ -1,6 +1,6 @@
 import * as ActionTypes from "../ActionTypes"
 import { call, put, takeEvery, all } from 'redux-saga/effects'
-import { forgotsAPI, googalelodinAPI, logauAPI, signinAPI, signupAPI } from '../../common/api/auth.api';
+import { forgotsAPI, googalelodinAPI, logauAPI, signinAPI, signupAPI } from '../../commene/api/auth.api';
 import { emailverification, loggedoutuser, logginuser } from '../action/auth.action';
 import { resetalert, setalert } from "../action/alert.action";
 import { history } from "../../history";
