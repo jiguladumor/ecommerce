@@ -1,22 +1,22 @@
-// import React, { useState } from "react";
-// import * as yup from "yup";
-// import { Form, Formik, useFormik } from "formik";
-// import { forgotpassword, googlelogin, signinuser, signupuser } from '../redux/action/auth.Action';
-// import { useDispatch } from "react-redux";
+import React, { useState } from "react";
+import * as yup from "yup";
+import { Form, Formik, useFormik } from "formik";
+import { forgotpassword, googlelogin, signinuser, signupuser } from '../redux/action/auth.Action';
+import { useDispatch } from "react-redux";
 
 // export default function Login() {
-//   const [usertype, setuserType] = useState("Login");
+//   const [usertype, setuserType] = useState("login");
 //   const [reset, setReset] = useState([])
  
 //   const dispatch = useDispatch()
 
 //   const handleLogin = (values) => {
-//     console.log(values);
+//     // console.log(values);
 //     dispatch(signinuser(values));
 //   };
 
 //   const handleSignup = (values) => {
-//     console.log(values);
+//     // console.log(values);
 //     dispatch(signupuser(values))
 //   };
 
@@ -28,20 +28,14 @@
 //     // alert(JSON.stringify(values.email));
 //     dispatch(forgotpassword(values))
 
-//   let Login = {
-//     email: yup
-//       .string()
-//       .required("please enter email")
-//       .email("please enter your email"),
+//   let login = {
+//     email: yup.string().required("please enter email").email("please enter your email"),
 //     password: yup.string().required("please enter your password"),
 //   };
 
 //   let Signup = {
 //     name: yup.string().required("please enter your name"),
-//     email: yup
-//       .string()
-//       .required("please enter email")
-//       .email("please enter your email"),
+//     email: yup.string().required("please enter email").email("please enter your email"),
 //     password: yup.string().required("please enter your password"),
 //   };
 
@@ -53,14 +47,14 @@
 //   let loginschema, initval;
 
 //   // console.log(reset);
-//   if (usertype === "Login" && !reset) {
-//     schema = yup.object().shape(Login);
+//   if (usertype === "login" && !reset) {
+//     loginschema = yup.object().shape(login);
 //     initval = {
 //         email: '',
 //         password: ''
 //     }
 // } else if (usertype === "Signup" && !reset) {
-//     schema = yup.object().shape(Signup);
+//     loginschema = yup.object().shape(Signup);
 //     initval = {
 //         // name: '',
 //         email: '',
@@ -68,7 +62,7 @@
 //     }
 // } else if (reset) {
 //     console.log(reset);
-//     schema = yup.object().shape(Password);
+//     loginschema = yup.object().shape(Password);
 //     initval = {
 //         email: ''
 //     }
@@ -80,7 +74,7 @@
 //     validationSchema: loginschema,
 //     onSubmit:(values, { resetForm }) => {
 //       // alert(JSON.stringify(values, null, 2));
-//       if (usertype === "Login" && !reset) {
+//       if (usertype === "login" && !reset) {
 //         handleLogin(values)
 //       } else if (usertype === "Signup" && !reset ) {
 //         handleSignup(values)
@@ -100,7 +94,7 @@
 //           {
 //             reset ?
 //               <h2 className='center'>Forget password</h2> :
-//               usertype === 'Login' ? <h2 className='center'>Login</h2> : <h2 className='center'>Signup</h2>
+//               usertype === 'login' ? <h2 className='center'>login</h2> : <h2 className='center'>Signup</h2>
 //           }
 //         </div>
 //         <div action method="post" className="php-email-form ">
@@ -124,7 +118,7 @@
 //                 ) : null}
 //                 {
 
-//                   usertype === "Login" ? null : (
+//                   usertype === "login" ? null : (
 //                     <div className="col-md-12 form-group mt-3 mt-md-0">
 //                       <input
 //                         type="name"
@@ -175,47 +169,26 @@
 //                 </div>
 //               </div>
 
-//               {/* {password ? (
-//                 <div className="text-center">
-//                   <button type="submit" onClick={() => passwordchng()}>
-//                     Forget password
-//                   </button>
-//                   <br></br>
-//                 </div>
-//               ) : usertype === "Login" ? (
-//                 <div className="text-center">
-//                   <button className="" type="submit" onClick={() => handleLogin()}>
-//                     Login
-//                   </button>
-//                   <br></br>
-//                 </div>
-//               ) : (
-//                 <div className="text-center">
-//                   <button onClick={() => handleSignup()} type={"submit"}>
-//                     signup
-//                   </button>
-//                 </div>
-//               )} */}
 //               {
-//                 password ?
+//                 reset ?
 //                   <div className="text-center">
 //                     <button type="submit">Forgot password</button>
 //                   </div>
 //                   :
-//                   usertype === 'Login' ?
+//                   usertype === 'login' ?
 //                     <div className="text-center">
-//                       <button type="submit">Login</button><br></br>
+//                       <button type="submit">login</button><br></br>
 //                     </div> :
 //                     <div className="text-center">
 //                       <button type="submit">signup</button>
 //                     </div>
 //               }
-//               {password === true ? (
+//               {reset === true ? (
 //                 <div className="text-center mt-5">
 //                   <span>already have an account ?</span>
-//                   <button onClick={() => setReset(false)} >Login</button>
+//                   <button onClick={() => setReset(false)} >login</button>
 //                 </div>
-//               ) : usertype === "Login" ? (
+//               ) : usertype === "login" ? (
 //                 <div className="text-center mt-5">
 //                   <span>create a New account ? </span>
 //                   <button className="border-0 bg-transparent text-warning"
@@ -239,13 +212,12 @@
 //                   <span>already have an account ?</span>
 //                   <button className="border-0 bg-transparent text-warning"
 //                     onClick={() => {
-//                       setuserType("Login");
+//                       setuserType("login");
 //                     }}
 //                   >
-//                     Login
+//                     login
 //                   </button>
-//                 </div>
-                
+//                 </div>                
 //               )}
 //               <div>
 //                 <button onClick={() => {handleGoogalesignup() }}>Googale Signup</button>
@@ -259,14 +231,14 @@
 // }
 // }
 
-import React, { useState } from 'react';
-import * as yup from 'yup';
-import { Form, Formik, useFormik } from 'formik';
-import { useDispatch } from 'react-redux';
-import { forgotpassword, googlelogin, signinuser, signupuser } from '../redux/action/auth.Action';
+// import React, { useState } from 'react';
+// import * as yup from 'yup';
+// import { Form, Formik, useFormik } from 'formik';
+// import { useDispatch } from 'react-redux';
+// import { forgotpassword, googlelogin, signinuser, signupuser } from '../redux/action/auth.Action';
 
 function Login(props) {
-    const [userType, setUserType] = useState('Login')
+    const [userType, setUserType] = useState('login')
     const [reset, setReset] = useState(false)
     
     const dispatch = useDispatch();
@@ -304,7 +276,7 @@ function Login(props) {
     let schema, initVal;
 
     // console.log(reset);
-    if (userType === "Login" && !reset) {
+    if (userType === "login" && !reset) {
         schema = yup.object().shape(login_set);
         initVal = {
             email: '',
@@ -329,7 +301,7 @@ function Login(props) {
         initialValues: initVal,
         validationSchema: schema,
         onSubmit: (values, { resetForm }) => {
-            if (userType === "Login" && !reset) {
+            if (userType === "login" && !reset) {
                 handletLogin(values)
             } else if (userType === "Signup" && !reset) {
                 handleSignup(values)
@@ -348,37 +320,13 @@ function Login(props) {
                     {
                         reset ?
                             <h2 className='centerr'>Reset Password</h2> :
-                            userType === 'Login' ? <h2 className='centerr'>Login</h2> : <h2 className='centerr'>Signup</h2>
+                            userType === 'login' ? <h2 className='centerr'>login</h2> : <h2 className='centerr'>Signup</h2>
                     }
                 </div>
                 <div className='php-email-form'>
                     <Formik value={formik}>
                         <Form onSubmit={formik.handleSubmit}>
                             <div className='row align-items-center justify-content-center'>
-                                {
-                                    userType === 'Login' ? null
-                                        :
-                                        // <div className="col-md-7 form-group">
-                                        //     <input
-                                        //         type="text"
-                                        //         name="name"
-                                        //         className="form-control"
-                                        //         id="name"
-                                        //         placeholder="Your Name"
-                                        //         onChange={formik.handleChange}
-                                        //         value={formik.values.name}
-                                        //         onBlur={formik.handleBlur}
-
-                                        //     />
-
-                                        //     {
-                                        //         formik.errors.name && formik.touched.name ? <p>{formik.errors.name}</p> : ''
-                                        //     }
-
-                                        //     <div className="validate" />
-                                        // </div>
-                                        <></>
-                                }
                                 <div className="col-md-7 form-group mt-3 mt-md-0">
                                     <input
                                         type="text"
@@ -393,7 +341,6 @@ function Login(props) {
                                     {
                                         formik.errors.email && formik.touched.email ? <p>{formik.errors.email}</p> : ''
                                     }
-
                                     <div className="validate" />
                                 </div>
                                 {
@@ -423,9 +370,9 @@ function Login(props) {
                                             <button type="submit" >Forgot password</button><br></br>
                                         </div>
                                         :
-                                        userType === 'Login' ?
+                                        userType === 'login' ?
                                             <div className="text-center">
-                                                <button type="submit">Login</button><br></br>
+                                                <button type="submit">login</button><br></br>
                                             </div> :
                                             <div className="text-center">
                                                 <button type="submit">signup</button>
@@ -435,9 +382,9 @@ function Login(props) {
                                     reset === true ?
                                         <div className='text-center mt-5'>
                                             <span>already have an account ?</span>
-                                            <a onClick={() => setReset(false)}>Login</a>
+                                            <a onClick={() => setReset(false)}>login</a>
                                         </div> :
-                                        userType === 'Login' ?
+                                        userType === 'login' ?
                                             <div className='text-center mt-5'>
                                                 <span>create a New account ?</span>
                                                 <a onClick={() => { setUserType('Signup') }} >Signup</a> <br></br>
@@ -445,7 +392,7 @@ function Login(props) {
                                             </div> :
                                             <div className='text-center mt-5'>
                                                 <span>already have an account ?</span>
-                                                <a onClick={() => { setUserType('Login') }} >Login</a>
+                                                <a onClick={() => { setUserType('login') }} >login</a>
                                             </div>
                                 }
                             </div>

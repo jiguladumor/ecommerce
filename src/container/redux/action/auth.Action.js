@@ -20,6 +20,7 @@ export const logoutuser = () => (dispech) => {
 }
 
 export const logginuser = (values) => (dispech) => {
+    console.log("logginuser", values);
     dispech({type:ActionTypes.LOGGIN_USER, payload: values});
 }
 

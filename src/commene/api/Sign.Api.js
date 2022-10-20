@@ -9,11 +9,13 @@ export const signupAPI = (data) => {
             .then((userCredential) => {
                 const user = userCredential.user;
                 // console.log(user);
+                
 
                 onAuthStateChanged(auth, (user) => {
                     if (user) {
                         sendEmailVerification(user)
                         const uid = user.uid;
+                        
                     } else {
 
                     }

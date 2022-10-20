@@ -1,16 +1,16 @@
-import * as ActionTypes from "../ActionTypes"
+import * as ActionTypes from "../ActionType"
 import { call, put, takeEvery, all } from 'redux-saga/effects'
-import { forgotsAPI, googalelodinAPI, logauAPI, signinAPI, signupAPI } from '../../commene/api/auth.api';
-import { emailverification, loggedoutuser, logginuser } from '../action/auth.action';
 import { resetalert, setalert } from "../action/alert.action";
-import { history } from "../../history";
+import { forgotsAPI, googalelodinAPI, logauAPI, signinAPI, signupAPI } from "../../../commene/api/Sign.Api";
+import { loggedoutuser, logginuser } from "../action/auth.Action";
+import { history } from "../../../history";
 
 
 function* signupUser(action) {
-  // console.log(action);
+  console.log(action);
   try {
     const user = yield call(signupAPI, action.payload);
-    //  console.log(user);
+     console.log("user", user);
     yield put(setalert({ text: user.payload, color: "success" }))
     //yield put(emailverification(user));
   } catch (e) {
@@ -23,9 +23,10 @@ function* signupUser(action) {
 function* signinUser(action) {
   try {
     const user = yield call(signinAPI, action.payload);
+    console.log("user", user)
+    yield put(setalert({ text: "Login successfully", color: "success" }))
     yield put(logginuser(user))
     history.push("/")
-    yield put(setalert({ text: "Login successfully", color: "success" }))
     // console.log(user);
   } catch (e) {
     yield put(setalert({ text: e.payload, color: "error" }))

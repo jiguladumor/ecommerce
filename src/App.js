@@ -23,9 +23,10 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
-      <SnackbarProvider maxSnack={3}>
-        <Provider store={store}>
+
+      <Provider store={store}>
+        <SnackbarProvider maxSnack={3}>
+          <Header />
           <Switch>
             <Route exact path={"/Home"} component={Home} />
             <Route exact path={"/About"} component={About} />
@@ -39,9 +40,9 @@ function App() {
             <Route exact path={"/Order_admin"} component={Order_admin} />
             <Route exact path={"/Addtocart"} component={Addtocart} />
           </Switch>
-        </Provider>
-        <Footer />
-      </SnackbarProvider>
+          <Footer />
+        </SnackbarProvider>
+      </Provider>
     </div>
   );
 }

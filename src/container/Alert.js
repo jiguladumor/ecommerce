@@ -9,7 +9,7 @@ export default function Alert() {
 
   const alert = useSelector(state => state.alert)
   const dispatch = useDispatch()
-
+  console.log("Alert");
 
   useEffect(() => {
     if (alert.text !== '') {
