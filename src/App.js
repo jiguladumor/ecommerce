@@ -10,12 +10,15 @@ import Login from './container/Login/Login';
 import Category_admin from './container/Admin/Category_admin'
 import Product_admin from './container/Admin/Product_admin';
 import { Provider } from 'react-redux';
-import { store } from './container/redux/Store';
+import { persistor, store } from './container/redux/Store';
 import ProductDetails from './container/Admin/ProductDetails';
 import Addtocart from './container/Admin/Addtocart';
 import Placeorder from './container/Admin/Placeorder';
 import Order_admin from './container/Admin/Order_admin';
 import { SnackbarProvider } from 'notistack';
+import { ToastContainer } from 'react-toastify';
+import AppRoute from './container/Route/AppRoute';
+import { PersistGate } from 'redux-persist/integration/react';
 
 
 
@@ -23,11 +26,12 @@ function App() {
 
   return (
     <div className="App">
-
-      <Provider store={store}>
-        <SnackbarProvider maxSnack={3}>
-          <Header />
-          <Switch>
+      <PersistGate loading={null} persistor={persistor}>
+        <Provider store={store}>
+          <SnackbarProvider maxSnack={3}>
+            <Header />
+            <AppRoute />
+            {/* <Switch>
             <Route exact path={"/Home"} component={Home} />
             <Route exact path={"/About"} component={About} />
             <Route exact path={"/Blog"} component={Blog} />
@@ -39,10 +43,25 @@ function App() {
             <Route exact path={"/Placeorder"} component={Placeorder} />
             <Route exact path={"/Order_admin"} component={Order_admin} />
             <Route exact path={"/Addtocart"} component={Addtocart} />
-          </Switch>
-          <Footer />
-        </SnackbarProvider>
-      </Provider>
+          </Switch> */}
+            <Footer />
+          </SnackbarProvider>
+        </Provider>
+      </PersistGate>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      {/* Same as */}
+      <ToastContainer />
     </div>
   );
 }
