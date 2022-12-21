@@ -266,14 +266,17 @@ export default function Product() {
                       name="categoryname"
                       className="form-select space"
                     >
-                      {categorydata.category.map((k) => {
+                      {
+                      categorydata.category.map((k) => {
+                        console.log(k);
                         // const{id, name} = k
 
-                        return <option value={k.id}>{k.categoryname}</option>;
+                        return <option value={k.categoryname}>{k.categoryname}</option>;
                       })}
                     </select>
 
                     <input
+                    
                       type="file"
                       name="file"
                       id="file"

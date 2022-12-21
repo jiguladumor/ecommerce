@@ -2,8 +2,7 @@ import * as ActionTypes from "../ActionType"
 
 export const 
 addCart = (d) => (dispatch) => {
-    // dispatch({type:ActionTypes.ADD_CART, payload:d})
-    
+    // dispatch({type:ActionTypes.ADD_CART, payload:d}) 
     dispatch({type:ActionTypes.ADD_CART, payload:{id:d.id,qty:1}})
 }
 

@@ -55,7 +55,7 @@ function Home(props) {
     },
         [])
 
-    let finalData = product.length > 0 ? product : products.product;
+    let  finalData = product.length > 0 ? product : products.product;
 
     console.log(finalData);
 
